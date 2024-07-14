@@ -1,0 +1,12 @@
+.navigation{
+    display: flex;
+    justify-content: space-between;
+}
+.slides{
+    display: flex;
+    gap: 20px;
+}
+.navigation a{
+    color: black;
+    text-decoration: none;
+}
