@@ -5,6 +5,7 @@ import Profile from './pages/profile/profile'
 import Login from './pages/login/login'
 import Home from './pages/home/home'
 import Navigation from './component/navigation/navigation'
+import './App.css'
 
 export default function App() {
   return (

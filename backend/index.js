@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dovenv from "dotenv"
+import cors from 'cors'
 
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
@@ -15,6 +16,7 @@ mongoose.connect(process.env.MONGO)
         console.log(err)
     }
 )
+app.use(cors());
 app.use(express.json())
 
 app.use('/api/user',userRouter)
