@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import style from './styles.module.css';
+import Oauth from '../../component/Oauth/oauth';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -124,7 +125,7 @@ const SignupPage = () => {
         <button type="submit" className={style.submitButton}>
           Sign Up
         </button>
-
+        <Oauth />
         {passwordError && (
             <div className={style.errorMessage}>{passwordError}</div>
           )}

@@ -14,6 +14,10 @@ const useSchema= mongoose.Schema({
         required:true,
         unique:true
     },
+    avatar:{
+        type:String,
+        default:"default"
+    }
 },{
     timestamps:true
 })

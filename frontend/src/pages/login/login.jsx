@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import style from './styles.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInFailure, signInStart, signInSuccess } from '../../redux/user/userSlice';
+import Oauth from '../../component/Oauth/oauth';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -96,6 +97,7 @@ const Login = () => {
         <button type="submit" className={style.submitButton}>
           Login
         </button>
+        <Oauth />
         {error && <p className={style.error}>{error}</p>}
       </form>
       <p className={style.login}>
