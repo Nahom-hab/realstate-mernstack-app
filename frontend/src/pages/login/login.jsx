@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './styles.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInFailure, signInStart, signInSuccess } from '../../redux/user/userSlice';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,8 +10,8 @@ const Login = () => {
     password: '',
     showPassword: false,
   });
-  const [error, setError] = useState('');
-
+  const { error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -24,6 +26,8 @@ const Login = () => {
     e.preventDefault();
     const { showPassword, ...data } = formData;
 
+    dispatch(signInStart());
+
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
@@ -35,13 +39,15 @@ const Login = () => {
 
       if (!res.ok) {
         const { error } = await res.json();
-        setError(error || 'Wrong Credientials');
+        dispatch(signInFailure(error.message));
         return;
       }
-      setError('');
+
+      const result = await res.json();
+      dispatch(signInSuccess(result)); // Assuming result contains user data or token
       navigate('/');
     } catch (err) {
-      setError('Network error, please try again later');
+      dispatch(signInFailure(err.message));
     }
   };
 
