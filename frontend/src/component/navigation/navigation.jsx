@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './styles.module.css';
 import { FaSearch } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 export default function Navigation() {
+  const {currentUser}=useSelector(state=>state.user)
   return (
     <header className={style.header}>
       <div className={style.container}>
@@ -21,13 +23,21 @@ export default function Navigation() {
           </button>
         </div>
         <nav className={style.nav}>
-          <ul>
-            <li>
-              <Link to="/profile">Profile</Link>
+          <ul className={style.ul}>
+          <li>
+              <Link to="/home">Home</Link>
             </li>
             <li>
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/home">About</Link>
             </li>
+            
+          {currentUser? 
+         
+          ( <Link to='/profile'><img className={style.profileimg} src={currentUser.photoURL} alt="profile" /></Link>):(
+            <li>
+              <Link to='./login'>Login</Link>
+            </li>
+          )}  
           </ul>
         </nav>
       </div>

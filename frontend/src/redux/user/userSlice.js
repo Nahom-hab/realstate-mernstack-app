@@ -1,8 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+// src/user/userSlice.js
+
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   currentUser: null,
-  error: null
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -18,13 +20,12 @@ const userSlice = createSlice({
     },
     signInFailure: (state, action) => {
       state.error = action.payload;
-    }
-  }
+    },
+  },
 });
 
-// Correctly export the reducer as default
-export const { signInStart, signInFailure, signInSuccess } = userSlice.actions;
+// Export actions
+export const { signInStart, signInSuccess, signInFailure } = userSlice.actions;
+
+// Export reducer as default
 export default userSlice.reducer;
-
-
-

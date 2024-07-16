@@ -12,9 +12,6 @@ export default function Oauth() {
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
-    console.log(result);
-    
-    
     try {
      
      
@@ -29,8 +26,10 @@ export default function Oauth() {
           photo:result.user.photoURL 
         })
       })
-      const data=await res.json();
-      dispatch(signInSuccess(data))
+      // // const data=await res.json();
+      // console.log(result);
+      // console.log(result.user)
+      dispatch(signInSuccess(result.user))
       navigate('/')
     } catch (error) {
         console.error('Error during Google Sign-In:', error);

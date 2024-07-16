@@ -1,29 +1,35 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import userReducer from './user/userSlice'
-import {persistReducer} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import persistStore from 'redux-persist/es/persistStore'
+// src/store/index.js
 
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import userReducer from './user/userSlice';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { persistStore } from 'redux-persist';
 
-const rootReducer=combineReducers({user:userReducer })
+// Combine reducers
+const rootReducer = combineReducers({
+  user: userReducer,
+});
 
-const persistConfig={
-  key:'root',
+// Persist configuration
+const persistConfig = {
+  key: 'root',
   storage,
-  version:1,
-}
+  version: 1,
+};
 
-const persistedReducer = persistReducer(persistConfig,rootReducer)
+// Create persisted reducer
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-
+// Configure the store
 export const store = configureStore({
-  reducer: {
-    user:persistedReducer
-  },
-  middleware:(getDefaultMiddleware)=>getDefaultMiddleware({
-    serializableCheck:false
+  reducer: persistedReducer, // Use persistedReducer directly here
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Disable serializableCheck for redux-persist
+    }),
+  devTools: process.env.NODE_ENV !== 'production', // Enable Redux DevTools in development mode
+});
 
-  }),   
-})
-
-export const persistor=persistStore(store)
+// Create the persistor
+export const persistor = persistStore(store);

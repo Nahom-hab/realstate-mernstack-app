@@ -81,3 +81,17 @@
   .searchButton:hover {
     color: #ff6b6b;
   }
+  .profileimg{
+    border-radius: 50%;
+    width: 40px;
+    margin-left: 15px;
+  }
+  .ul{
+    display: flex;
+    align-items: center;
+
+  }
+  .profileimg:hover{
+    opacity: 0.8;
+    cursor: pointer;
+  }
