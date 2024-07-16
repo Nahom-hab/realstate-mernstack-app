@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import style from './styles.module.css';
 
 const SignupPage = () => {
@@ -20,7 +20,7 @@ const SignupPage = () => {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-
+  const navigate=useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
@@ -36,6 +36,7 @@ const SignupPage = () => {
           },
           body: JSON.stringify(data),
         });
+        navigate('/login')
         if (res.ok) {
           // Signup successful
           console.log('Signup successful');

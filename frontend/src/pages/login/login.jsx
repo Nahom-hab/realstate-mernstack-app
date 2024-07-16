@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import style from './styles.module.css'
+import { Link, useNavigate } from 'react-router-dom';
+import style from './styles.module.css';
 
-
-export default function Login() {
+const Login = () => {
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
     password: '',
     showPassword: false,
   });
+  const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -19,34 +20,41 @@ export default function Login() {
     }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const { showPassword, ...data } = formData;
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const { error } = await res.json();
+        setError(error || 'Wrong Credientials');
+        return;
+      }
+      setError('');
+      navigate('/');
+    } catch (err) {
+      setError('Network error, please try again later');
+    }
   };
 
   return (
     <div className={style.container}>
       <h1 className={style.title}>Login</h1>
       <form onSubmit={handleSubmit} className={style.form}>
-        <label htmlFor="username" className={style.label}>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder='Username'
-            value={formData.username}
-            onChange={handleInputChange}
-            className={style.input}
-            required
-          />
-        </label>
         <label htmlFor="email" className={style.label}>
-
           <input
             type="email"
             id="email"
             name="email"
-            placeholder='Email'
+            placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
             className={style.input}
@@ -59,33 +67,36 @@ export default function Login() {
               type={formData.showPassword ? 'text' : 'password'}
               id="password"
               name="password"
-              placeholder='Password'
+              placeholder="Password"
               value={formData.password}
               onChange={handleInputChange}
               className={style.input}
               required
             />
-           <div className={style.showpass}>
-           <label htmlFor="showPassword" className={style.showPassword}>
-              <input
-                type="checkbox"
-                id="showPassword"
-                name="showPassword"
-                checked={formData.showPassword}
-                onChange={handleInputChange}
-              />
-              Show Password
-            </label>
-           </div>
           </div>
         </label>
+        <div className={style.showpass}>
+          <label htmlFor="showPassword" className={style.showPassword}>
+            <input
+              type="checkbox"
+              id="showPassword"
+              name="showPassword"
+              checked={formData.showPassword}
+              onChange={handleInputChange}
+            />
+            Show Password
+          </label>
+        </div>
         <button type="submit" className={style.submitButton}>
           Login
         </button>
+        {error && <p className={style.error}>{error}</p>}
       </form>
       <p className={style.login}>
-        Already have an account? <Link to="/signup">Sign up</Link>
+        Don't have an account? <Link to="/signup">Sign Up</Link>
       </p>
     </div>
   );
 };
+
+export default Login;

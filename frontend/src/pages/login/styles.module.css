@@ -68,10 +68,7 @@
     margin-top: 1rem;
     font-size: 0.875rem;
   }
-  .showpass{
-    display: flex;
-    justify-content: end;
-  }
+  
   .login a {
     color: #007bff;
     text-decoration: none;
@@ -79,4 +76,16 @@
   
   .login a:hover {
     text-decoration: underline;
+  }
+  .showpass{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+  }
+  .errorMessage{
+    margin-top: 10px;
+    color: rgb(186, 26, 26);
+  }
+  .error{
+    color: red;
   }

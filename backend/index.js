@@ -32,6 +32,6 @@ app.use((err,req,res,next)=>{
     })
 })
 
-app.listen(3000,(req,res)=>{
-    console.log("server is running on port 3000")
+app.listen(8000,(req,res)=>{
+    console.log("server is running on port 8000")
 })
