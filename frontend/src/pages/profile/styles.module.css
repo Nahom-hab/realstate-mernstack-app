@@ -74,4 +74,21 @@
   }
   
 
-  
+  .span{
+    color: rgb(29, 173, 29);
+    margin: 0;
+  }
+  .succuss{
+    color: rgb(4, 168, 4);
+    margin: 0;
+  }
+  .error{
+    color:rgb(226, 26, 26);
+    margin: 0;
+  }
+  .message{
+    margin: auto;
+  }
+  .uploading{
+    margin: 0;
+  }

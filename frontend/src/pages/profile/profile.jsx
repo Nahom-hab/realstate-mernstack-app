@@ -1,42 +1,61 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import { useSelector } from "react-redux"
-import { signInFailure,signInSuccess,signInStart } from '../../redux/user/userSlice'
+import { getDownloadURL, getStorage,ref, uploadBytesResumable } from 'firebase/storage'
+import { app } from '../../firebase'
+import { errorHandeler } from '../../../../backend/utils/error'
 
 export default function Profile() {
+  const fileRef=useRef(null)
   const {currentUser} = useSelector(state => state.user)
+  const [file,setFile]=useState(undefined)
+  const [filePercent, setFilepercent]=useState(0)
+  const [fileUploadError,setFileUploadError]=useState(false)
+  const [formData,setFormData]=useState({})
+  console.log(formData);
+ useEffect(()=>{
+    if(file){
+      handleFileUpload(file);
+    }
+ },[file])
+ const handleFileUpload=(file)=>{
+        const storage=getStorage(app)
+        const fileName=new Date().getTime()+file.name;
+        const storageRef=ref(storage,fileName)
+        const uploadTask=uploadBytesResumable(storageRef,file)
 
-  // const getuser=async ()=>{
-  //   try {
-  //     const res = await fetch('/api/user/getuser', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(data),
-  //     });
-  //     if (!res.ok) {
-  //       const { error } = await res.json();
-  //       dispatch(signInFailure(error.message));
-  //       return;
-  //     }
+        uploadTask.on('state_changed',
+          (snapshot)=>{
+            const progress=(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+            setFilepercent(Math.round(progress))
+          },
+          (error)=>{
+            setFileUploadError(true)
+          }, 
+          ()=>{
+            getDownloadURL(uploadTask.snapshot.ref).then(
+                (downloadURL)=>{
+                  setFormData({...formData,avatar:downloadURL})
+                })
+          }
 
-  //     const myuser = await res.json();
-  //     console.log(myuser);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+        )
+ }
 
-  // getuser()
   return (
 
     <div className={styles.container}>
 
       <h2 className={styles.profileHeader}>Profile</h2>
+      <input onChange={(e)=>setFile(e.target.files[0])}  type="file" hidden accept='image/*'  ref={fileRef}/>
+      <img onClick={()=>fileRef.current.click()} className={styles.profileImage} src={formData.avatar||currentUser.photoURL} alt="" />
 
-      <img className={styles.profileImage} src={currentUser.photoURL} alt="" />
-
+      <div className={styles.message}>
+          {(fileUploadError)?<p className={styles.error}>Error uploading Image</p>
+          :(filePercent>0 && filePercent<100)?<p className={styles.uploading} >File uploading <span className={styles.span}>{filePercent}%</span></p>
+          :(filePercent==100)?<p className={styles.succuss}>File uploaded successfully</p>:null}
+      </div>
+      
       <form className={styles.formContainer}>
 
         <input className={styles.formInput} type="text" placeholder='Username'/>
@@ -60,7 +79,7 @@ export default function Profile() {
         <p className={styles.deleteAccount}>Sign out</p>
 
       </div>
-      
+
     </div>
 
   );
