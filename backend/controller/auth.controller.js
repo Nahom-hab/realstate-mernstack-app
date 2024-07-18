@@ -48,6 +48,14 @@ export const userdata = async (req, res, next) => {
    }
 }
 
+export const signout=(req,res,next)=>{
+   try {
+      res.clearCookie('access_token')
+      res.status(200).json('user logged out')
+   } catch (error) {
+      next(error)
+   }
+}
 
 
 export const google=async(req,res,next)=>{
@@ -75,13 +83,10 @@ export const google=async(req,res,next)=>{
             .cookie('access_token',token,{httpOnly:true})
             .status(200)
             .json(otheruserdata)
-            
-         
+                
       }
    } catch (error) {
       next(error)
       
-   }
-
-   
+   }  
 }

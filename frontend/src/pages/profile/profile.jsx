@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../../firebase';
-import { deleteStart, deleteSuccess, deleteFailure } from '../../redux/user/userSlice';
+import { deleteStart, deleteSuccess, deleteFailure, signoutStart, signoutFailure, signoutSuccess } from '../../redux/user/userSlice';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -111,6 +111,7 @@ export default function Profile() {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       try {
+        dispatch(deleteStart())
         const res = await fetch(`/api/user/delete/${userdata._id}`, {
           method: 'DELETE',
         });
@@ -128,6 +129,23 @@ export default function Profile() {
       }
     }
   };
+  
+  const handleSignout=async()=>{
+    try {
+      dispatch(signoutStart())
+      const res=await fetch('/api/auth/signout')
+      const data= await res.json()
+      if(!res.ok){
+        dispatch(signoutFailure(data.message))
+        return
+      }
+      dispatch(signoutSuccess(data))
+      
+    } catch (error) {
+      dispatch(signoutFailure(error.message))
+      
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -192,7 +210,7 @@ export default function Profile() {
       {submitStatus && <p className={styles.submissionstatus}>{submitStatus}</p>}
       <div className={styles.delete}>
         <p onClick={handleDelete} className={styles.deleteAccount}>Delete account</p>
-        <p className={styles.deleteAccount}>Sign out</p>
+        <p onClick={handleSignout} className={styles.deleteAccount}>Sign out</p>
       </div>
     </div>
   );

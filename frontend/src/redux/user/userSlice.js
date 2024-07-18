@@ -21,7 +21,7 @@ const userSlice = createSlice({
     signInFailure: (state, action) => {
       state.error = action.payload;
     },
-    deleteSuccess: (state) => {
+    deleteStart: (state) => {
       state.error = null;
     },
     deleteSuccess: (state, action) => {
@@ -31,11 +31,21 @@ const userSlice = createSlice({
     deleteFailure: (state, action) => {
       state.error = action.payload;
     },
+    signoutSuccess: (state) => {
+      state.currentUser = null;
+      state.error = null;
+    },
+    signoutFailure: (state, action) => {
+      state.error = action.payload;
+    },
+    signoutStart: (state, action) => {
+      state.error = null;
+    },
   },
 });
 
 // Export actions
-export const { signInStart, signInSuccess, signInFailure,deleteFailure,deleteStart,deleteSuccess } = userSlice.actions;
+export const {signoutSuccess,signoutFailure,signoutStart, signInStart, signInSuccess, signInFailure,deleteFailure,deleteStart,deleteSuccess } = userSlice.actions;
 
 // Export reducer as default
 export default userSlice.reducer;
