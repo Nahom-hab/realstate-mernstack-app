@@ -1,17 +1,17 @@
-# POST http://localhost:8000/api/auth/login
+# POST  http://localhost:8000/api/auth/login
 # Content-Type: application/json
 
 # {
-#   "email": "nnnnahom.@gmail.com",
+#   "email": "nnnnnahom.@gmail.com",
 #   "password": "password"
 
 # }
 
-DELETE   http://localhost:8000/api/user/delete/66999670cd1ce1d72ef47c18
+POST    http://localhost:8000/api/listing/create
 Content-Type: application/json
 
 {
-  "email": "NahomHabtamu1woj"
+  "name": "NahomHabtamu1woj"
 
 }
 
