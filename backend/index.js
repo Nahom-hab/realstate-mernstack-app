@@ -1,12 +1,14 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dovenv from "dotenv"
+import cookieParser from 'cookie-parser';
 import cors from 'cors'
 
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
 
 const app=express();
+app.use(cookieParser())
 dovenv.config()
 mongoose.connect(process.env.MONGO)
     .then(()=>{
@@ -21,6 +23,7 @@ app.use(express.json())
 
 app.use('/api/user',userRouter)
 app.use('/api/auth',authRouter)
+
 
 
 app.use((err,req,res,next)=>{

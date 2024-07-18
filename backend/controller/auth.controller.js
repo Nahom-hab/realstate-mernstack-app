@@ -35,11 +35,26 @@ export const login=async (req,res,next)=>{
       next(err)
    }
 }
+
+export const userdata = async (req, res, next) => {
+   const { email } = req.body;
+   try {
+      const validUser = await User.findOne({ email });
+      if (!validUser) return next(errorHandeler(404, 'user not found'));
+      const {password,...otheruserdata}=validUser._doc
+      res.json(otheruserdata);
+   } catch (error) {
+      next(error);
+   }
+}
+
+
+
 export const google=async(req,res,next)=>{
    try {
-      const user =User.findOne({email:req.body.email})
+      const user =await User.findOne({email:req.body.email})
       if(user){
-         const token=jwt.sign({id:validUser._id},process.env.SECRET)
+         const token=jwt.sign({id:user._id},process.env.SECRET)
          const {password:pass,...otheruserdata}=user._doc
          res
             .cookie('access_token',token,{httpOnly:true})
@@ -52,8 +67,7 @@ export const google=async(req,res,next)=>{
          const generatedUsername=req.body.username.split(' ').join('')+Math.random().toString(36).slice(-4)
          const newUser=new User({username:generatedUsername,
                                  password:hashedpassword,
-                                 email:req.body.email,
-                                 photo:req.body.photo})
+                                 email:req.body.email})
          newUser.save()
          const token=jwt.sign({id:validUser._id},process.env.SECRET)
          const {password:pass,...otheruserdata}=user._doc
@@ -61,6 +75,8 @@ export const google=async(req,res,next)=>{
             .cookie('access_token',token,{httpOnly:true})
             .status(200)
             .json(otheruserdata)
+            
+         
       }
    } catch (error) {
       next(error)

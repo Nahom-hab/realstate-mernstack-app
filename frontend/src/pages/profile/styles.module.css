@@ -17,6 +17,10 @@
     font-weight: bold;
     color: #333;
   }
+  .submissionstatus{
+    margin-left: 20px;
+    margin-top: 0;
+  }
   
   .profileImage {
     width: 100px;
@@ -44,10 +48,12 @@
   }
   
   .updateButton {
-    padding: 10px 30px;
-    margin: 5px;
+    padding: 10px 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 5px;
+
     background-color: #4CAF50;
     color: #fff;
     width: 100%;

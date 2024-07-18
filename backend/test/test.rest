@@ -1,9 +1,17 @@
-POST http://localhost:8000/api/auth/login
+# POST http://localhost:8000/api/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "nahom.@gmail.com",
+#   "password": "password"
+
+# }
+
+POST  http://localhost:8000/api/user/update/6693c966499505ea0e219342
 Content-Type: application/json
 
 {
-  "email": "nahom.@gmail.com",
-  "password": "password"
+  "email": "nahomhabt@gmail.com"
 
 }
 

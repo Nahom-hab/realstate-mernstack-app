@@ -1,17 +1,23 @@
 import User from "../models/userModel.js"
-import { errorHandeler } from "../utils/error.js"
+import { errorHandeler } from "../utils/error.js";
+import bcryptjs from 'bcryptjs'
 
-export const userdata= async (req,res,next)=>{
-    const {email}=req.body
+export const userdata = async (req, res, next) => {
     try {
-        const validUser=await User.findOne({email})
-        const {password:hashedpassword,...otheruserdata}=validUser._doc
-        res.json(otheruserdata) 
+        const validUser = await User.findOne({ email: 'test@example.com' }); // Replace with an actual email from your database
+        console.log('Valid User:', validUser);
+        if (validUser) {
+            const {password,...otheruserdata}=validUser._doc
+            res.json(otheruserdata);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
     } catch (error) {
-        next(error)
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-   
 }
+
 
 
 
@@ -21,3 +27,38 @@ export const test=(req,res)=>{
     })
 }
 
+
+
+export const updateUser = async (req, res, next) => {
+    if (req.user.id !== req.params.id) {
+      return next(errorHandeler(401, 'You can only update your own account'));
+    }
+  
+    try {
+      if (req.body.password) {
+        req.body.password = bcryptjs.hashSync(req.body.password, 10);
+      }
+  
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            avatar: req.body.avatar
+          }
+        },
+        { new: true }
+      );
+  
+      if (!updatedUser) {
+        return next(errorHandeler(404, 'User not found'));
+      }
+  
+      const { password, ...rest } = updatedUser.toObject();
+      res.status(200).json(rest);
+    } catch (error) {
+      next(error);
+    }
+}
