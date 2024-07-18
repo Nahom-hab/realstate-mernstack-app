@@ -2,16 +2,16 @@
 # Content-Type: application/json
 
 # {
-#   "email": "nahom.@gmail.com",
+#   "email": "nnnnahom.@gmail.com",
 #   "password": "password"
 
 # }
 
-POST  http://localhost:8000/api/user/update/6693c966499505ea0e219342
+DELETE   http://localhost:8000/api/user/delete/66999670cd1ce1d72ef47c18
 Content-Type: application/json
 
 {
-  "email": "nahomhabt@gmail.com"
+  "email": "NahomHabtamu1woj"
 
 }
 

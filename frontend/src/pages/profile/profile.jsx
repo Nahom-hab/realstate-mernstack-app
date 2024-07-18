@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../../firebase';
+import { deleteStart, deleteSuccess, deleteFailure } from '../../redux/user/userSlice';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -14,6 +15,7 @@ export default function Profile() {
   const [userdata, setUserdata] = useState({});
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (file) {
@@ -94,6 +96,8 @@ export default function Profile() {
         body: JSON.stringify(formData),
       });
       if (res.ok) {
+        const updatedUser = await res.json();
+        setUserdata(updatedUser);
         setSubmitStatus('Profile updated successfully!');
       } else {
         setSubmitStatus('Failed to update profile.');
@@ -101,6 +105,27 @@ export default function Profile() {
     } catch (error) {
       console.error('Error updating profile', error);
       setSubmitStatus('Error updating profile.');
+    }
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+      try {
+        const res = await fetch(`/api/user/delete/${userdata._id}`, {
+          method: 'DELETE',
+        });
+        if (res.ok) {
+          const data = await res.json();
+          dispatch(deleteSuccess(data));
+        } else {
+          const errorData = await res.json();
+          dispatch(deleteFailure(errorData.message));
+ 
+        }
+      } catch (error) {
+        console.error('Error deleting account', error);
+        dispatch(deleteFailure(error.message));
+      }
     }
   };
 
@@ -166,7 +191,7 @@ export default function Profile() {
       )}
       {submitStatus && <p className={styles.submissionstatus}>{submitStatus}</p>}
       <div className={styles.delete}>
-        <p className={styles.deleteAccount}>Delete account</p>
+        <p onClick={handleDelete} className={styles.deleteAccount}>Delete account</p>
         <p className={styles.deleteAccount}>Sign out</p>
       </div>
     </div>
