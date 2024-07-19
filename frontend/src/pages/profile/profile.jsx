@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../../firebase';
 import { deleteStart, deleteSuccess, deleteFailure, signoutStart, signoutFailure, signoutSuccess } from '../../redux/user/userSlice';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -202,9 +203,11 @@ export default function Profile() {
           <button className={styles.updateButton} type="submit">
             UPDATE
           </button>
-          <button className={styles.updateButton} type="button">
+         <Link to='/createListing'>
+         <button className={styles.updateButton} type="button">
             CREATE LISTING
           </button>
+        </Link> 
         </form>
       )}
       {submitStatus && <p className={styles.submissionstatus}>{submitStatus}</p>}

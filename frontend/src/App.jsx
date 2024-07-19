@@ -4,6 +4,7 @@ import Signup from './pages/signup/signup'
 import Profile from './pages/profile/profile'
 import Login from './pages/login/login'
 import Home from './pages/home/home'
+import CreateLising from './pages/createlisting/CreateLising'
 import Navigation from './component/navigation/navigation'
 import './App.css'
 import ProtectedRoute from './component/protectedRoute/protectedRoute'
@@ -19,6 +20,7 @@ export default function App() {
         <Route path='/signup' element={<Signup />}></Route>
         <Route element={<ProtectedRoute />}>
             <Route path='/profile' element={<Profile />}></Route>
+            <Route path='/createListing' element={<CreateLising />}></Route>
         </Route>
         
       </Routes>
