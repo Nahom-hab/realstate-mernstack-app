@@ -260,8 +260,8 @@ export default function Profile() {
       {listingData && listingData.map((listing) => (
         <div key={listing._id} className={styles.list}>
           <img className={styles.imagess} src={listing.imageURLs[0]} alt="" />
-          <div className={styles.titlelisting}>{listing.name}</div>
-          <div>
+         <Link to={`/viewListing/${listing._id}`}> <div className={styles.titlelisting} >{listing.name}</div></Link>   
+         <div>
             <button className={styles.delete_listing} onClick={(e) => handleDeleteListing(listing._id, e)}>DELETE</button>
             <Link to={`/editListing/${listing._id}`}>
               <button className={styles.editListing}>EDIT</button>
