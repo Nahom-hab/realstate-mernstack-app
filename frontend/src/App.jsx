@@ -8,6 +8,7 @@ import CreateLising from './pages/createlisting/CreateLising'
 import Navigation from './component/navigation/navigation'
 import './App.css'
 import ProtectedRoute from './component/protectedRoute/protectedRoute'
+import EditListing from './pages/EditLIsting/editListing'
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/editListing/:id' element={<EditListing />}></Route>
         <Route element={<ProtectedRoute />}>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/createListing' element={<CreateLising />}></Route>

@@ -1,6 +1,7 @@
 import User from "../models/userModel.js"
 import { errorHandeler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs'
+import Listing from '../models/listingModel.js'
 
 export const userdata = async (req, res, next) => {
     try {
@@ -16,15 +17,6 @@ export const userdata = async (req, res, next) => {
         console.error('Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
-}
-
-
-
-
-export const test=(req,res)=>{
-    res.json({
-        message:'controller is working'
-    })
 }
 
 
@@ -76,4 +68,23 @@ export const deleteUser= async (req,res,next) => {
     } catch (error) {
         next(error);
     }
+}
+
+export const getListings=async (req,res,next)=>{
+  if (req.user.id !== req.params.id) {
+    return next(errorHandeler(401, 'You can only get your own listings'));
+  }
+  else{
+    try {
+        const listings = await Listing.find({userRef:req.params.id});
+        if (!listings) {
+            return next(errorHandeler(404, 'Listing not found'));
+        }
+        res.status(200).json(listings);
+        
+    } catch (error) {
+        next(error);
+    }
+  }
+
 }

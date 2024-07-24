@@ -1,0 +1,124 @@
+.lisingContainer {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 2rem;
+    padding-top: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .heading {
+    text-align: center;
+    margin-top: 0px;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  .listingInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .fail{
+    color: red;
+    margin: 5px;
+  }
+  .succuss{
+    color: rgb(23, 153, 23);
+    margin: 5px;
+  }
+  .textInput, .numberInput {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .checkBoxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .checkBox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .checkBox input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  
+  .numberInputs {
+    display: grid;
+    grid-template-columns: repeat(4, 75px);
+  
+    gap: 50px;
+  }
+  .numberInputs>div{
+    width: 85px;
+  }
+  
+  
+  .numberInput {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .numberLabel {
+    font-size: 0.7rem;
+    color: #666;
+    width: 100px;
+  
+  }
+  
+  .fileInput {
+    display: none;
+  }
+  
+  .uploadLabel {
+    display: inline-block;
+    background-color: #0ada0d;
+    width:40%;
+    text-align: center;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  
+  .uploadLabel:hover{
+    opacity: 0.7;
+  }
+  .submitButton {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    background-color: #007bff;
+    color: #fff;
+    margin-top: 10px;
+    border: none;
+    width: 100%;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .flex{
+    display: flex;
+    gap: 20px;
+  }
+  .inputIMG{
+    height: 40px;
+    width: 40%;
+  }
+  
+  .submitButton:hover {
+    background-color: #0056b3;
+  }

@@ -32,6 +32,7 @@ export default function Oauth() {
         console.error('Error during Google Sign-In:', error);
     }
   };
+  
 
   return (
     <button

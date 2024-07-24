@@ -57,36 +57,35 @@ export const signout=(req,res,next)=>{
    }
 }
 
+export const google = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.SECRET);
+      const { password: pass, ...otheruserdata } = user._doc;
+      res
+        .cookie('access_token', token, { httpOnly: true })
+        .status(200)
+        .json(otheruserdata);
+    } else {
+      const generatedPassword = Math.random().toString(36).slice(-8);
+      const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+      const generatedUsername = req.body.username.split(' ').join('') + Math.random().toString(36).slice(-4);
+      const newUser = new User({
+        username: generatedUsername,
+        password: hashedPassword,
+        email: req.body.email,
+      });
 
-export const google=async(req,res,next)=>{
-   try {
-      const user =await User.findOne({email:req.body.email})
-      if(user){
-         const token=jwt.sign({id:user._id},process.env.SECRET)
-         const {password:pass,...otheruserdata}=user._doc
-         res
-            .cookie('access_token',token,{httpOnly:true})
-            .status(200)
-            .json(otheruserdata)
-   
-      }else{
-         const generatedPassword=Math.random().toString(36).slice(-8)
-         const hashedpassword=bcryptjs.hashSync(generatedPassword,10)
-         const generatedUsername=req.body.username.split(' ').join('')+Math.random().toString(36).slice(-4)
-         const newUser=new User({username:generatedUsername,
-                                 password:hashedpassword,
-                                 email:req.body.email})
-         newUser.save()
-         const token=jwt.sign({id:validUser._id},process.env.SECRET)
-         const {password:pass,...otheruserdata}=user._doc
-         res
-            .cookie('access_token',token,{httpOnly:true})
-            .status(200)
-            .json(otheruserdata)
-                
-      }
-   } catch (error) {
-      next(error)
-      
-   }  
-}
+      const savedUser = await newUser.save();
+      const token = jwt.sign({ id: savedUser._id }, process.env.SECRET);
+      const { password: pass, ...otheruserdata } = savedUser._doc;
+      res
+        .cookie('access_token', token, { httpOnly: true })
+        .status(200)
+        .json(otheruserdata);
+    }
+  } catch (error) {
+    next(error);
+  }
+};

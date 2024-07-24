@@ -7,13 +7,50 @@
 
 # }
 
-POST    http://localhost:8000/api/listing/create
-Content-Type: application/json
 
-{
-  "name": "NahomHabtamu1woj"
 
-}
+GET      http://localhost:8000/api/user/getListing/6699ab37d62a7bc056507216
+# Content-Type: application/json
+
+# {
+#   "name": "test_comp",
+#     "description": "test1",
+#     "address": "test1",
+#     "regularPrice": 232,
+#     "discountedPrice": 123,
+#     "bathrooms": 1,
+#     "bedrooms": 1,
+#     "furnished": false,
+#     "parking": false,
+#     "offer": false,
+#     "imageURLs": ["a,ajakalkalakal","akjakajakjakajm"],
+#     "type": "test1",
+#     "userRef":"6699ab37d62a7bc056507216"
+
+# }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # POST http://localhost:8000/api/auth/signup
