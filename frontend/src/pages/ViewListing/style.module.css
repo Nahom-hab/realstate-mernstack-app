@@ -69,6 +69,8 @@
   .flex{
     display: flex;
     gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 19px;
   }
   .price{
     padding: 5px 30px;
@@ -77,3 +79,39 @@
     width: fit-content;
    background-color: green; 
   }
+  .title{
+    font-size: 20px;
+    color: rgb(43, 42, 42);
+    margin-bottom: 20px;
+  }
+  .location{
+    color: green;
+    padding-right: 6px;
+    font-size: 14px;
+  }
+  .address{
+    font-size: 13px;
+
+  }
+  .discription{
+    color: black;
+    font-weight: 800;
+
+  }
+  .discription span{
+    color: rgb(41, 40, 40);
+    font-weight: normal;
+  }
+  .things{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .things p{
+    font-size: small;
+  }
+  .icon{
+    font-size: 15px;
+    
+  }
+  

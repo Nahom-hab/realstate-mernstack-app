@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import style from './style.module.css';
 import { useParams } from 'react-router-dom';
+import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking } from 'react-icons/fa';
 
 export default function ViewListing() {
   const [listing, setListing] = useState(null);
@@ -52,18 +53,26 @@ export default function ViewListing() {
       </div>
       <div className={style.listingDetails}>
         <div className={style.title}>{listing.name}{listing.type?` - $${listing.regularPrice}/Month`:''}</div>
-        <p>Description:{listing.description}</p>
-        <p>Address: {listing.address}</p>
-        <div className={style.flex}>
-          <div className={style.type}> {listing.type?'For Rent':'For Sale'}</div>
-          <div className={style.price}>$ {listing.regularPrice}</div>
+            
+            <p className={style.address}>
+              <FaMapMarkerAlt className={style.location} />
+              {listing.address}
+            </p>
+
+            <div className={style.flex}>
+              <div className={style.type}> {listing.type?'For Rent':'For Sale'}</div>
+              <div className={style.price}>$ {listing.regularPrice}</div>
+            </div>
+
+            <p className={style.discription}>Description: <span>{listing.description}</span> </p>
+       
+        <div className={style.things}>
+          <p><FaBed  className={style.icon}/> {listing.bedrooms} bed</p>
+          <p> <FaBath  className={style.icon}/> {listing.bathrooms} bath</p>
+          <p> <FaParking  className={style.icon}/> {listing.furnished ? 'Parking' : 'No Parking'}</p>
+          <p> <FaChair  className={style.icon}/>{listing.parking ? 'Furnished' : 'No Furnished'}</p>  
         </div>
-      
-        <p>Bedrooms: {listing.bedrooms}</p>
-        <p>Bathrooms: {listing.bathrooms}</p>
-        <p>Furnished: {listing.furnished ? 'Yes' : 'No'}</p>
-        <p>Parking Spot:{listing.parking ? 'Yes' : 'No'}</p>
-        
+       
         {listing.offer && <p>Discounted Price:{listing.discountedPrice}</p>}
       </div>
     </div>
