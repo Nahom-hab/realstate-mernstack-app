@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import style from './style.module.css';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking } from 'react-icons/fa';
+import Contact from '../../component/contact/Contact';
 
 export default function ViewListing() {
   const [listing, setListing] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const params = useParams();
+  const { currentUser } = useSelector((state) => state.user);
+  const [landlord,setLandlord]=useState(false)
+ 
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -22,6 +27,7 @@ export default function ViewListing() {
       }
     };
     fetchListing();
+    console.log(currentUser);
   }, [params.id]);
 
   useEffect(() => {
@@ -42,6 +48,7 @@ export default function ViewListing() {
   if (!listing) {
     return <p>Loading...</p>;
   }
+
 
   return (
     <div className={style.listingContainer}>
@@ -74,6 +81,15 @@ export default function ViewListing() {
         </div>
        
         {listing.offer && <p>Discounted Price:{listing.discountedPrice}</p>}
+        <div>
+          {currentUser&&(currentUser.email!==listing.email)&&!landlord&&(
+            <button className={style.contact} onClick={()=>{setLandlord(true)}}>Contact Landlord</button>
+          )
+          } 
+          {landlord&&(
+            <Contact listing={listing} />
+          )}  
+        </div>
       </div>
     </div>
   );

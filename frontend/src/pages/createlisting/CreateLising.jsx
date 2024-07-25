@@ -11,9 +11,9 @@ export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
   const navigate =useNavigate()
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    address: '',
+    name: null,
+    description: null,
+    address: null,
     regularPrice: '',
     discountedPrice: '',
     bathrooms: 1,
@@ -24,6 +24,8 @@ export default function CreateListing() {
     imageURLs: [],
     type: '',
     userRef: '',
+    email:'',
+    username:''
   });
   
   
@@ -116,10 +118,11 @@ export default function CreateListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formData.userRef=userData._id
+    formData.email=userData.email
+    formData.username=userData.username
     if(!formData.discountedPrice){
         formData.discountedPrice=formData.regularPrice
     }
-    console.log(formData);
     try {
       const res = await fetch('/api/listing/create', {
         method: 'POST',

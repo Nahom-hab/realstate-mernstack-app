@@ -28,6 +28,8 @@ export default function EditListing() {
     imageURLs: [],
     type: '',
     userRef: '',
+    email:'',
+    username:''
   });
 
   useEffect(() => {
@@ -130,6 +132,8 @@ export default function EditListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formData.userRef = userData._id;
+    formData.email=userData.email
+    formData.username=userData.username
     if (!formData.discountedPrice) {
       formData.discountedPrice = formData.regularPrice;
     }
