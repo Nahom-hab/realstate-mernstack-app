@@ -11,6 +11,7 @@ import ProtectedRoute from './component/protectedRoute/protectedRoute'
 import EditListing from './pages/EditLIsting/editListing'
 import ViewListing from './pages/ViewListing/viewlisting'
 import MyListing from './pages/mylisting/MyListing'
+import Search from './pages/search/Search'
 
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/editListing/:id' element={<EditListing />}></Route>
         <Route path='/viewListing/:id' element={<ViewListing />}></Route>
+        <Route path='/search' element={<Search />}></Route>
         <Route element={<ProtectedRoute />}>
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/createListing' element={<CreateLising />}></Route>

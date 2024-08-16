@@ -1,0 +1,231 @@
+/* Container for layout */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 10px;
+    max-width: 100%;
+    margin: auto;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+/* Form styling */
+.form {
+    flex: 1;
+    width: 340px;
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+    box-sizing: border-box;
+}
+
+/* Heading for the form */
+.heading {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Search input */
+.search {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.search label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+.search input[type="text"] {
+    width: 60%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Checkboxes section */
+.searchCheckboxes {
+    margin-bottom: 1rem;
+}
+
+.checkboxContainer {
+    margin-bottom: 1rem;
+}
+
+.checkboxGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.checkBox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkBox input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.checkBox label {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Sort section */
+.sort {
+    margin-top: 1rem;
+    border: none;
+}
+
+.sort label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    color: #666;
+}
+
+.sort select {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: none;
+    font-size: 1rem;
+
+}
+
+.sort select:focus {
+    outline: none;
+    border: none;
+}
+
+/* Results section */
+.results {
+    flex: 2;
+    background: #f5f5f5;
+    border-radius: 8px;
+    height: 100vh;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Grid layout for results */
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+/* Result card styling */
+.resultCard {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.resultCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Info styling */
+.resultInfo {
+    padding: 1rem;
+}
+
+.resultName {
+    font-size: 1rem;
+    margin-top: 8px;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.resultPrice {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #007bff;
+}
+
+.resultLocation {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Placeholder for results */
+.resultsPlaceholder {
+    color: #999;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .gridContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .gridContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .gridContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form_btn {
+    border: none;
+    background-color: rgb(38, 38, 42);
+    padding: 10px 30px;
+    font-size: 15px;
+    width: 100%;
+    color: white;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.form_btn:hover {
+    opacity: 0.8;
+}
