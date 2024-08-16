@@ -1,100 +1,105 @@
 /* styles.module.css */
 
 .container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .profileHeader {
-    margin: auto;
-    font-weight: bold;
-    color: #333;
-  }
-  .submissionstatus{
-    margin-left: 20px;
-    margin-top: 0;
-  }
-  
-  .profileImage {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 10px auto;
-    display: block;
-  }
-  
-  .formContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .formInput {
-    padding: 10px;
-    margin-top: 5px;
-    font-size: 15px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  .updateButton {
-    padding: 10px 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border: none;
-    border-radius: 5px;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
 
-    background-color: #4CAF50;
-    color: #fff;
-    width: 100%;
-    cursor: pointer;
-  }
-  
-  .updateButton:hover {
-    background-color: #3e8e41;
-  }
+.profileHeader {
+  margin: auto;
+  font-weight: bold;
+  color: #333;
+}
 
-  .delete{
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .deleteAccount {
-    margin: 0px 20px;
-    color: red;
-    cursor: pointer;
-  }
-  
-  .deleteAccount:hover {
-    color: #e94343;
-  }
-  
+.submissionstatus {
+  margin-left: 20px;
+  margin-top: 0;
+}
 
-  .span{
-    color: rgb(29, 173, 29);
-    margin: 0;
-  }
-  .succuss{
-    color: rgb(4, 168, 4);
-    margin: 0;
-  }
-  .error{
-    color:rgb(226, 26, 26);
-    margin: 0;
-  }
-  .message{
-    margin: auto;
-  }
-  .uploading{
-    margin: 0;
-  }
+.profileImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 10px auto;
+  display: block;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.formInput {
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 15px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.updateButton {
+  padding: 10px 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 5px;
+
+  background-color: #4CAF50;
+  color: #fff;
+  width: 100%;
+  cursor: pointer;
+}
+
+.updateButton:hover {
+  background-color: #3e8e41;
+}
+
+.delete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deleteAccount {
+  margin: 0px 20px;
+  color: red;
+  cursor: pointer;
+}
+
+.deleteAccount:hover {
+  color: #e94343;
+}
+
+
+.span {
+  color: rgb(29, 173, 29);
+  margin: 0;
+}
+
+.succuss {
+  color: rgb(4, 168, 4);
+  margin: 0;
+}
+
+.error {
+  color: rgb(226, 26, 26);
+  margin: 0;
+}
+
+.message {
+  margin: auto;
+}
+
+.uploading {
+  margin: 0;
+}

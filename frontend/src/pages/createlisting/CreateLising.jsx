@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 export default function CreateListing() {
   const [files, setFiles] = useState(null);
-  const [userData,setUserdata]=useState(false)
+  const [userData, setUserdata] = useState(false)
   const { currentUser } = useSelector((state) => state.user);
-  const navigate =useNavigate()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: null,
     description: null,
@@ -24,23 +24,23 @@ export default function CreateListing() {
     imageURLs: [],
     type: '',
     userRef: '',
-    email:'',
-    username:''
+    email: '',
+    username: ''
   });
-  
-  
+
+
   const [loading, setLoading] = useState(false);
-  const [submiterror,setSubmiterror]=useState(false)
-    
+  const [submiterror, setSubmiterror] = useState(false)
+
   useEffect(() => {
-    if(!userData){
+    if (!userData) {
       getUser()
     }
   }, [userData])
-  
 
 
- 
+
+
   const getUser = async () => {
     try {
       const res = await fetch('/api/auth/getuser', {
@@ -113,15 +113,15 @@ export default function CreateListing() {
       imageURLs: prevData.imageURLs.filter((url, i) => i !== index)
     }));
   };
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formData.userRef=userData._id
-    formData.email=userData.email
-    formData.username=userData.username
-    if(!formData.discountedPrice){
-        formData.discountedPrice=formData.regularPrice
+    formData.userRef = userData._id
+    formData.email = userData.email
+    formData.username = userData.username
+    if (!formData.discountedPrice) {
+      formData.discountedPrice = formData.regularPrice
     }
     try {
       const res = await fetch('/api/listing/create', {
@@ -137,7 +137,7 @@ export default function CreateListing() {
     } catch (error) {
       setSubmiterror(true)
     }
-    
+
   };
 
   return (
@@ -148,7 +148,7 @@ export default function CreateListing() {
           <input className={style.textInput} type="text" id="name" placeholder="Name" onChange={handleInputChange} />
           <input className={style.textInput} type="text" id="description" placeholder="Description" onChange={handleInputChange} />
           <input className={style.textInput} type="text" id="address" placeholder="Address" onChange={handleInputChange} />
-          
+
           <div className={style.checkBoxes}>
             <div className={style.checkBox}>
               <input type="checkbox" id="furnished" onChange={handleInputChange} />
@@ -187,24 +187,26 @@ export default function CreateListing() {
           <input className={style.textInput} type="text" id="type" placeholder="Type" onChange={handleInputChange} />
         </div>
         <p>The first image will be the cover image (max=6)</p>
-        <div className={style.flex}>
-          <input type="file" className={style.inputIMG} multiple onChange={(e) => setFiles(e.target.files)}  />
+        <div className={style.flexlast}>
+          <input type="file" className={style.inputIMG} multiple onChange={(e) => setFiles(e.target.files)} />
           <button type="button" onClick={handleImageUpload} className={style.uploadLabel}>
             {loading ? 'Uploading...' : 'Upload photos'}
           </button>
         </div>
-        {formData.imageURLs? 
-          formData.imageURLs.map((image,index)=>{
-            return(
-              <div key={index}>
-                <img src={image} alt="" />
-                <button type='button' onClick={()=>handleImageRemove(index)}>delete</button>
+        <div className={style.contimg}>
+          {formData.imageURLs.length > 0 &&
+            formData.imageURLs.map((image, index) => (
+              <div className={style.listing_imgs} key={index}>
+                <img className={style.listing_images} src={image} alt={`Listing ${index}`} />
+                <button className={style.delbutton} type="button" onClick={() => handleImageRemove(index)}>
+                  delete
+                </button>
               </div>
-            )
-        }):''}
-      
-        <button  onClick={handleSubmit} className={style.submitButton} type="submit">Upload Listing</button>
-        {submiterror?<p className={fail}>Error submiting Listing</p>:''}
+            ))}
+        </div>
+
+        <button onClick={handleSubmit} className={style.submitButton} type="submit">Upload Listing</button>
+        {submiterror ? <p className={fail}>Error submiting Listing</p> : ''}
       </form>
     </div>
   );

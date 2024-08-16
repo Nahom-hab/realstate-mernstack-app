@@ -22,15 +22,19 @@
   flex-direction: column;
   gap: 1.5rem;
 }
-.fail{
+
+.fail {
   color: red;
   margin: 5px;
 }
-.succuss{
+
+.succuss {
   color: rgb(23, 153, 23);
   margin: 5px;
 }
-.textInput, .numberInput {
+
+.textInput,
+.numberInput {
   padding: 0.8rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -60,7 +64,8 @@
 
   gap: 50px;
 }
-.numberInputs>div{
+
+.numberInputs>div {
   width: 85px;
 }
 
@@ -84,8 +89,10 @@
 
 .uploadLabel {
   display: inline-block;
-  background-color: #0ada0d;
-  width:40%;
+  background-color: #007bff;
+  width: 40%;
+
+  border: none;
   text-align: center;
   color: #fff;
   padding: 0.8rem 1.5rem;
@@ -94,9 +101,10 @@
   cursor: pointer;
 }
 
-.uploadLabel:hover{
-  opacity: 0.7;
+.uploadLabel:hover {
+  background-color: #0056b3;
 }
+
 .submitButton {
   display: block;
   padding: 0.8rem 1.5rem;
@@ -110,15 +118,58 @@
   font-size: 1rem;
   cursor: pointer;
 }
-.flex{
+
+.flex {
   display: flex;
   gap: 20px;
 }
-.inputIMG{
+
+.inputIMG {
   height: 40px;
   width: 40%;
 }
 
 .submitButton:hover {
   background-color: #0056b3;
+}
+
+.listing_images {
+  width: 100px;
+  height: 120px;
+  border-radius: 10px;
+}
+
+.listing_imgs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px
+}
+
+.flexlast {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delbutton {
+  background-color: rgb(206, 42, 42);
+  color: white;
+  border: none;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.delbutton:hover {
+  opacity: 0.5;
+
+}
+
+.contimg {
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

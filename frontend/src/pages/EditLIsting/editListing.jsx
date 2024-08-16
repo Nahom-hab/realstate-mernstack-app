@@ -28,8 +28,8 @@ export default function EditListing() {
     imageURLs: [],
     type: '',
     userRef: '',
-    email:'',
-    username:''
+    email: '',
+    username: ''
   });
 
   useEffect(() => {
@@ -132,8 +132,8 @@ export default function EditListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formData.userRef = userData._id;
-    formData.email=userData.email
-    formData.username=userData.username
+    formData.email = userData.email
+    formData.username = userData.username
     if (!formData.discountedPrice) {
       formData.discountedPrice = formData.regularPrice;
     }
@@ -284,7 +284,7 @@ export default function EditListing() {
           />
         </div>
         <p>The first image will be the cover image (max=6)</p>
-        <div className={style.flex}>
+        <div className={style.flexlast}>
           <input
             type="file"
             className={style.inputIMG}
@@ -299,15 +299,17 @@ export default function EditListing() {
             {loading ? 'Uploading...' : 'Upload photos'}
           </button>
         </div>
-        {formData.imageURLs.length > 0 &&
-          formData.imageURLs.map((image, index) => (
-            <div key={index}>
-              <img src={image} alt={`Listing ${index}`} />
-              <button type="button" onClick={() => handleImageRemove(index)}>
-                delete
-              </button>
-            </div>
-          ))}
+        <div className={style.contimg}>
+          {formData.imageURLs.length > 0 &&
+            formData.imageURLs.map((image, index) => (
+              <div className={style.listing_imgs} key={index}>
+                <img className={style.listing_images} src={image} alt={`Listing ${index}`} />
+                <button className={style.delbutton} type="button" onClick={() => handleImageRemove(index)}>
+                  delete
+                </button>
+              </div>
+            ))}
+        </div>
         <button className={style.submitButton} type="submit">
           Update Listing
         </button>

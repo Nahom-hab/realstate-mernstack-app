@@ -15,11 +15,7 @@ export default function Profile() {
   const [formData, setFormData] = useState({});
   const [userdata, setUserdata] = useState({});
   const [loading, setLoading] = useState(false);
-  const [listingLoading, setListingLoading] = useState(false);
-  const [listingData, setListingData] = useState(null);
   const [submitStatus, setSubmitStatus] = useState('');
-  const [listingDeleteError, setListingDeleteError] = useState(false);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -148,46 +144,6 @@ export default function Profile() {
     }
   };
 
-  const handleShowListing = async () => {
-    try {
-      setListingLoading(true);
-      const res = await fetch(`/api/user/getListing/${userdata._id}`, {
-        method: 'GET',
-      });
-      if (res.ok) {
-        const Listings = await res.json();
-        setListingData(Listings);
-      }
-      setListingLoading(false);
-    } catch (error) {
-      console.log(error);
-      setListingLoading(false);
-    }
-  };
-
-  const handleDeleteListing = async (id, e) => {
-    e.preventDefault(); // Corrected method name
-    if (window.confirm('Are you sure you want to delete This Listing? This action cannot be undone.')) {
-      setListingData((prev) => prev.filter((list) => list._id !== id));
-
-      try {
-        const res = await fetch(`/api/listing/deleteListing/${id}`, {
-          method: 'DELETE',
-        });
-        if (res.ok) {
-          const data = await res.json();
-          // Handle success if needed
-        } else {
-          const errorData = await res.json();
-          setListingDeleteError(true);
-        }
-      } catch (error) {
-        console.log(error);
-        setListingDeleteError(true);
-      }
-    }
-  };
-
   return (
     <div className={styles.container}>
       <h2 className={styles.profileHeader}>Profile</h2>
@@ -255,20 +211,7 @@ export default function Profile() {
         <p onClick={handleDelete} className={styles.deleteAccount}>Delete account</p>
         <p onClick={handleSignout} className={styles.deleteAccount}>Sign out</p>
       </div>
-      <div onClick={handleShowListing}>show listing</div>
-      <div>{listingLoading ? 'Loading....' : ''}</div>
-      {listingData && listingData.map((listing) => (
-        <div key={listing._id} className={styles.list}>
-          <img className={styles.imagess} src={listing.imageURLs[0]} alt="" />
-         <Link to={`/viewListing/${listing._id}`}> <div className={styles.titlelisting} >{listing.name}</div></Link>   
-         <div>
-            <button className={styles.delete_listing} onClick={(e) => handleDeleteListing(listing._id, e)}>DELETE</button>
-            <Link to={`/editListing/${listing._id}`}>
-              <button className={styles.editListing}>EDIT</button>
-            </Link>
-          </div>
-        </div>
-      ))}
+
     </div>
   );
 }
