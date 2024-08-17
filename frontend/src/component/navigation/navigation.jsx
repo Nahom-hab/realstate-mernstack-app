@@ -51,9 +51,14 @@ export default function Navigation() {
         </form>
 
         <nav className={style.nav}>
+          <div className={style.hamburgeur}>
+            <div className={style.line}></div>
+            <div className={style.line}></div>
+            <div className={style.line}></div>
+          </div>
           <ul className={style.ul}>
             <li>
-              <Link to="/home">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             {currentUser ? (
               <li>
@@ -65,7 +70,7 @@ export default function Navigation() {
             {currentUser ?
 
               (
-                <Link to='/profile'><img className={style.profileimg} src={currentUser.photoURL} alt="profile" /></Link>) : (
+                <li><Link to='/profile'><img className={style.profileimg} src={currentUser.photoURL} alt="profile" /></Link></li>) : (
                 <li>
                   <Link to='./login'>Login</Link>
                 </li>

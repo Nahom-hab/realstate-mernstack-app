@@ -1,0 +1,126 @@
+/* Results section */
+.results {
+    flex: 1;
+    background: #f5f5f5;
+    border-radius: 8px;
+    height: 85svh;
+    width: 65%;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Grid layout for results */
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 220px);
+    gap: 1rem;
+}
+
+/* Result card styling */
+.resultCard {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.location {
+    color: green;
+    margin-right: 8px;
+
+}
+
+.resultdiscription {
+    font-size: 12px;
+    color: #575353;
+    margin-bottom: 10px;
+}
+
+.resultCard img {
+    height: 140px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+/* .resultCard img:hover {
+    zoom: 110%;
+} */
+
+.resultCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Info styling */
+.resultInfo {
+    padding: 1rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.4rem;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bedrooms {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.resultName {
+    font-size: 1rem;
+    margin-top: 8px;
+    margin-bottom: 0.5rem;
+    color: #000000;
+    font-weight: 500;
+}
+
+.resultprice {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #537e19;
+    margin-top: 5px;
+}
+
+.resultLocation {
+    font-size: 12px;
+    color: #666;
+
+    margin-bottom: 6px;
+}
+
+/* Placeholder for results */
+.resultsPlaceholder {
+    color: #999;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 750px) {
+    .results {
+        width: 100%;
+    }
+}

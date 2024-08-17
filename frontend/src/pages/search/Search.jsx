@@ -1,72 +1,89 @@
-import React, { useState } from 'react';
-import ImageSlider from '../../component/ImageSlider/slider';
+import React, { useEffect, useState } from 'react';
 import styles from './style.module.css'; // Import CSS module
+import { useNavigate, useLocation } from 'react-router-dom';
+import ListingCard from '../../component/listingCard/ListingCard';
+
 
 export default function Search() {
-    // Combined state object for form fields
+    const navigate = useNavigate();
+    const location = useLocation(); // Correctly use useLocation
+    const [listing, setListing] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         searchTerm: '',
-        selectedType: '', // Single value for selected type
+        selectedType: 'all',
         offer: false,
         furnished: false,
         parking: false,
-        sortOption: 'desc'
+        sort: 'createdAt',
+        order: 'desc'
     });
 
-    // Sample results
-    const sampleResults = [
-        {
-            id: 1,
-            images: [
-                'https://cms.interiorcompany.com/wp-content/uploads/2023/11/simple-home-design-Warm-grey-exteriors.png',
-                'https://images.pexels.com/photos/1643381/pexels-photo-1643381.jpeg'
-            ],
-            name: 'Luxury Apartment in Downtown',
-            price: '$1,200,000',
-            location: 'Downtown City Center',
-            type: 'rentAndSale'
-        },
-        {
-            id: 2,
-            images: [
-                'https://images.pexels.com/photos/1643381/pexels-photo-1643381.jpeg'
-            ],
-            name: 'Cozy Cottage in the Suburbs',
-            price: '$350,000',
-            location: 'Sunny Suburbs',
-            type: 'sale'
-        },
-        {
-            id: 3,
-            images: [
-                'https://images.pexels.com/photos/1643381/pexels-photo-1643381.jpeg'
-            ],
-            name: 'Modern Loft with City View',
-            price: '$950,000',
-            location: 'City View District',
-            type: 'rent'
-        },
-        {
-            id: 4,
-            images: [
-                'https://images.pexels.com/photos/1643381/pexels-photo-1643381.jpeg'
-            ],
-            name: 'Charming Villa Near the Beach',
-            price: '$2,500,000',
-            location: 'Beachside Haven',
-            type: 'rentAndSale'
-        }
-    ];
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search);
+        const searchTermFromUrl = urlParams.get('searchTerm');
+        const typeFromUrl = urlParams.get('type');
+        const parkingTermFromUrl = urlParams.get('parking');
+        const furnishedFromUrl = urlParams.get('furnished');
+        const offerFromUrl = urlParams.get('offer');
+        const sortFromUrl = urlParams.get('sort');
+        const optionFromUrl = urlParams.get('option');
 
-    // Handle form field changes
+        if (
+            searchTermFromUrl ||
+            parkingTermFromUrl ||
+            typeFromUrl ||
+            furnishedFromUrl ||
+            offerFromUrl ||
+            optionFromUrl ||
+            sortFromUrl
+        ) {
+            setFormData({
+                searchTerm: searchTermFromUrl || '',
+                selectedType: typeFromUrl || 'all',
+                parking: parkingTermFromUrl === 'true',
+                furnished: furnishedFromUrl === 'true',
+                offer: offerFromUrl === 'true',
+                sort: sortFromUrl || 'createdAt',
+                order: optionFromUrl || 'desc'
+            });
+        }
+        const fetchdata = async () => {
+            try {
+                setLoading(true)
+                const res = await fetch(`/api/listing/get?${urlParams.toString()}`)
+                if (res.ok) {
+                    const Listings = await res.json();
+                    setListing(Listings);
+
+                }
+
+                setLoading(false)
+            } catch (error) {
+                console.log(error);
+                setLoading(false)
+            }
+        };
+        fetchdata();
+
+    }, [location.search]);
+
+    const sampleResults = [];
+
     const handleChange = (e) => {
         const { id, value, type, checked } = e.target;
 
         if (id === 'selectedType') {
-            // Set the selected type to the value of the checked checkbox
             setFormData((prev) => ({
                 ...prev,
-                selectedType: checked ? value : '' // Clear the value if unchecked
+                selectedType: checked ? value : 'all'
+            }));
+        } else if (id === 'sortOption') {
+            const [sort, order] = value.split('_');
+            setFormData((prev) => ({
+                ...prev,
+                sort,
+                order
             }));
         } else {
             setFormData((prev) => ({
@@ -76,12 +93,19 @@ export default function Search() {
         }
     };
 
-    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
+        const urlParams = new URLSearchParams();
+        urlParams.set('searchTerm', formData.searchTerm);
+        urlParams.set('type', formData.selectedType);
+        urlParams.set('parking', formData.parking);
+        urlParams.set('furnished', formData.furnished); // Fixed typo
+        urlParams.set('offer', formData.offer);
+        urlParams.set('sort', formData.sort);
+        urlParams.set('option', formData.order); // Corrected key to match formData
 
+        navigate(`/search?${urlParams.toString()}`);
         console.log(formData);
-
     };
 
     return (
@@ -103,7 +127,7 @@ export default function Search() {
                     <div className={styles.checkboxContainer}>
                         <p>Type:</p>
                         <div className={styles.checkboxGroup}>
-                            {['rentAndSale', 'rent', 'sale'].map((type) => (
+                            {['all', 'rent', 'sale'].map((type) => (
                                 <div key={type} className={styles.checkBox}>
                                     <input
                                         type="checkbox"
@@ -113,7 +137,7 @@ export default function Search() {
                                         onChange={handleChange}
                                     />
                                     <label htmlFor="selectedType">
-                                        {type === 'rentAndSale' ? 'Rent & Sale' : type.charAt(0).toUpperCase() + type.slice(1)}
+                                        {type === 'all' ? 'Rent & Sale' : type.charAt(0).toUpperCase() + type.slice(1)}
                                     </label>
                                 </div>
                             ))}
@@ -161,37 +185,20 @@ export default function Search() {
 
                 <div className={styles.sort}>
                     <label htmlFor="sortOption">Sort:</label>
-                    <select id="sortOption" defaultValue='desc' value={formData.sortOption} onChange={handleChange}>
-                        <option value="asec">Latest</option>
-                        <option value="desc">Oldest</option>
-                        <option value="price_desc">Price high to low</option>
-                        <option value="price_asec">Price low to high</option>
+                    <select id="sortOption" value={`${formData.sort}_${formData.order}`} onChange={handleChange}>
+                        <option value="createdAt_asc">Latest</option>
+                        <option value="createdAt_desc">Oldest</option>
+                        <option value="regularPrice_desc">Price high to low</option>
+                        <option value="regularPrice_asc">Price low to high</option>
                     </select>
                 </div>
                 <button className={styles.form_btn} type="submit">
                     SEARCH
                 </button>
             </form>
+            <ListingCard listing={listing} />
 
-            <div className={styles.results}>
-                <div className={styles.gridContainer}>
-                    {/* Display filtered results here */}
-                    {sampleResults.length > 0 ? (
-                        sampleResults.map((result) => (
-                            <div key={result.id} className={styles.resultCard}>
-                                <ImageSlider images={result.images} />
-                                <div className={styles.resultInfo}>
-                                    <div className={styles.resultName}>{result.name}</div>
-                                    <div className={styles.resultPrice}>{result.price}</div>
-                                    <div className={styles.resultLocation}>{result.location}</div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className={styles.resultsPlaceholder}>No results found</div>
-                    )}
-                </div>
-            </div>
+
         </div>
     );
 }

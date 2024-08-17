@@ -1,0 +1,28 @@
+.heding {
+    font-size: 45px;
+    font-family: Tahoma, sans-serif;
+    font-weight: 700;
+}
+
+.easy {
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.img {
+    width: 100%;
+}
+
+
+.title {
+    display: flex;
+    padding: 2rem;
+    padding-top: 200px;
+    padding-left: 100px;
+    flex-direction: column;
+}
+
+.text {
+    color: green;
+    font-weight: 700;
+}

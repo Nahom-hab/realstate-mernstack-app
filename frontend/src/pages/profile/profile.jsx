@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../../firebase';
 import { deleteStart, deleteSuccess, deleteFailure, signoutStart, signoutFailure, signoutSuccess } from '../../redux/user/userSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -17,6 +17,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (file) {
@@ -145,73 +146,74 @@ export default function Profile() {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.profileHeader}>Profile</h2>
-      <input
-        onChange={handleFileChange}
-        type="file"
-        hidden
-        accept="image/*"
-        ref={fileRef}
-      />
-      <img
-        onClick={() => fileRef.current.click()}
-        className={styles.profileImage}
-        src={formData.avatar || currentUser.photoURL}
-        alt="Profile"
-      />
-      <div className={styles.message}>
-        {fileUploadError && <p className={styles.error}>Error uploading image</p>}
-        {filePercent > 0 && filePercent < 100 && (
-          <p className={styles.uploading}>
-            File uploading <span className={styles.span}>{filePercent}%</span>
-          </p>
+    <div className={styles.pad}>
+      <div className={styles.container}>
+        <h2 className={styles.profileHeader}>Profile</h2>
+        <input
+          onChange={handleFileChange}
+          type="file"
+          hidden
+          accept="image/*"
+          ref={fileRef}
+        />
+        <img
+          onClick={() => fileRef.current.click()}
+          className={styles.profileImage}
+          src={formData.avatar || currentUser.photoURL}
+          alt="Profile"
+        />
+        <div className={styles.message}>
+          {fileUploadError && <p className={styles.error}>Error uploading image</p>}
+          {filePercent > 0 && filePercent < 100 && (
+            <p className={styles.uploading}>
+              File uploading <span className={styles.span}>{filePercent}%</span>
+            </p>
+          )}
+          {filePercent === 100 && <p className={styles.success}>File uploaded successfully</p>}
+        </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <form className={styles.formContainer} onSubmit={handleSubmit}>
+            <input
+              onChange={handleChange}
+              className={styles.formInput}
+              type="text"
+              placeholder="Username"
+              name="username"
+              defaultValue={userdata.username}
+            />
+            <input
+              onChange={handleChange}
+              className={styles.formInput}
+              type="text"
+              placeholder="Email"
+              name="email"
+              defaultValue={userdata.email}
+            />
+            <input
+              onChange={handleChange}
+              className={styles.formInput}
+              type="password"
+              placeholder="Password"
+              name="password"
+            />
+            <div className={styles.flexx}>
+              <button className={styles.Button} type="submit">
+                UPDATE
+              </button>
+              <button onClick={() => { navigate('/createListing') }} className={styles.updateButton} type="button">
+                CREATE LISTING
+              </button>
+            </div>
+          </form>
         )}
-        {filePercent === 100 && <p className={styles.success}>File uploaded successfully</p>}
+        {submitStatus && <p className={styles.submissionstatus}>{submitStatus}</p>}
+        <div className={styles.delete}>
+          <p onClick={handleDelete} className={styles.deleteAccount}>Delete account</p>
+          <p onClick={handleSignout} className={styles.deleteAccount}>Sign out</p>
+        </div>
       </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <form className={styles.formContainer} onSubmit={handleSubmit}>
-          <input
-            onChange={handleChange}
-            className={styles.formInput}
-            type="text"
-            placeholder="Username"
-            name="username"
-            defaultValue={userdata.username}
-          />
-          <input
-            onChange={handleChange}
-            className={styles.formInput}
-            type="text"
-            placeholder="Email"
-            name="email"
-            defaultValue={userdata.email}
-          />
-          <input
-            onChange={handleChange}
-            className={styles.formInput}
-            type="password"
-            placeholder="Password"
-            name="password"
-          />
-          <button className={styles.updateButton} type="submit">
-            UPDATE
-          </button>
-          <Link to='/createListing'>
-            <button className={styles.updateButton} type="button">
-              CREATE LISTING
-            </button>
-          </Link>
-        </form>
-      )}
-      {submitStatus && <p className={styles.submissionstatus}>{submitStatus}</p>}
-      <div className={styles.delete}>
-        <p onClick={handleDelete} className={styles.deleteAccount}>Delete account</p>
-        <p onClick={handleSignout} className={styles.deleteAccount}>Sign out</p>
-      </div>
-
     </div>
   );
 }
