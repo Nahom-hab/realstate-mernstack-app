@@ -7,7 +7,7 @@
 
 # }
 
-GET    http://localhost:8000/api/listing/get??searchTerm=&type=all&parking=true&furnished=true&offer=trur&sort=createdAt&option=desc
+GET    http://localhost:8000/api/listing/get?type=sale
 
 # GET      http://localhost:8000/api/user/getListing/6699ab37d62a7bc056507216
 # Content-Type: application/json

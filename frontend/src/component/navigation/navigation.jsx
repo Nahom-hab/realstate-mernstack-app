@@ -60,6 +60,9 @@ export default function Navigation() {
             <li>
               <Link to="/">Home</Link>
             </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
             {currentUser ? (
               <li>
                 <Link to="/mylisting">My Listing</Link>

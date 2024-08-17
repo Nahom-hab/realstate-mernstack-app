@@ -1,0 +1,177 @@
+.about {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.story,
+.mission,
+.values,
+.team {
+    margin: 40px 0;
+    padding-left: 12%;
+    padding-right: 12%;
+}
+
+.story h2,
+.mission h2,
+.values h2,
+.team h2 {
+    font-size: 2.5rem;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.valuesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.value {
+    flex: 1;
+    min-width: 220px;
+    background: #b9b6b6;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.value h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.value p {
+    color: #666;
+}
+
+.team {
+    text-align: center;
+}
+
+.teamMembers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.member {
+    flex: 1;
+    max-width: 200px;
+    margin: 10px;
+}
+
+.member img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.member h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2rem;
+}
+
+.member p {
+    color: #666;
+}
+
+/* Media Queries for Smaller Devices */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1.25rem;
+    }
+
+    .story h2,
+    .mission h2,
+    .values h2,
+    .team h2 {
+        font-size: 2rem;
+    }
+
+    .value h3 {
+        font-size: 1.25rem;
+    }
+
+    .value p {
+        font-size: 0.875rem;
+    }
+
+    .member h3 {
+        font-size: 1rem;
+    }
+
+    .member p {
+        font-size: 0.875rem;
+    }
+
+    .story,
+    .mission,
+    .values,
+    .team {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .story h2,
+    .mission h2,
+    .values h2,
+    .team h2 {
+        font-size: 1.5rem;
+    }
+
+    .value h3 {
+        font-size: 1rem;
+    }
+
+    .value p {
+        font-size: 0.75rem;
+    }
+
+    .member h3 {
+        font-size: 0.875rem;
+    }
+
+    .member p {
+        font-size: 0.75rem;
+    }
+
+    .story,
+    .mission,
+    .values,
+    .team {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}

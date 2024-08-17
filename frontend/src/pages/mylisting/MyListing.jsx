@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './style.module.css'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Card from '../../component/card/Card';
 
 export default function MyListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -82,14 +83,14 @@ export default function MyListing() {
   };
 
   return (
-    <div>
-
-      <div>{listingLoading ? 'Loading....' : ''}</div>
+    <div className={style.MyListing}>
+      {/* 
+      <div>{listingLoading ? 'Loading....' : ''}</div> */}
       {listingData && listingData.map((listing) => (
         <div key={listing._id} className={style.list}>
-          <img className={style.images} src={listing.imageURLs[0]} alt="" />
-          <Link to={`/viewListing/${listing._id}`}> <div className={style.titlelisting} >{listing.name}</div></Link>
-          <div>
+          <Card result={listing} />
+
+          <div className={style.btn}>
             <button className={style.delete_listing} onClick={(e) => handleDeleteListing(listing._id, e)}>DELETE</button>
             <Link to={`/editListing/${listing._id}`}>
               <button className={style.editListing}>EDIT</button>

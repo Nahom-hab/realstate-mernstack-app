@@ -1,3 +1,35 @@
-.images {
-    width: 100px;
+.MyListing {
+    padding-left: 12%;
+    padding-right: 12%;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: rgb(185, 185, 185);
+
+}
+
+.delete_listing {
+    padding: 5px 20px;
+    border: none;
+    background-color: rgb(160, 28, 28);
+    border-radius: 6px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.editListing {
+    padding: 5px 20px;
+    border: none;
+    background-color: rgb(20, 126, 153);
+    border-radius: 6px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
 }

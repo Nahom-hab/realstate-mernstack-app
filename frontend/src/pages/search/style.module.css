@@ -6,12 +6,12 @@
     padding: 10px;
     margin: auto;
     box-sizing: border-box;
-    padding-top: 90px;
 }
 
 /* Form styling */
 .form {
-    background: #f5f5f5;
+    background-color: rgb(226, 225, 225);
+
     border: 1px solid #e0e0e0;
     width: 30%;
     border-radius: 8px;

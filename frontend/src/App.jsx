@@ -12,6 +12,7 @@ import EditListing from './pages/EditLIsting/editListing'
 import ViewListing from './pages/ViewListing/viewlisting'
 import MyListing from './pages/mylisting/MyListing'
 import Search from './pages/search/Search'
+import About from './pages/about/about'
 
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/about' element={<About />}></Route>
         <Route path='/editListing/:id' element={<EditListing />}></Route>
         <Route path='/viewListing/:id' element={<ViewListing />}></Route>
         <Route path='/search' element={<Search />}></Route>

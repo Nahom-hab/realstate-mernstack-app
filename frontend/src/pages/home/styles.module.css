@@ -1,28 +1,105 @@
-.heding {
-    font-size: 45px;
-    font-family: Tahoma, sans-serif;
-    font-weight: 700;
+.container {
+    position: relative;
+    margin-top: -5px;
+    background-color: rgb(185, 185, 185);
 }
 
-.easy {
-    font-size: 30px;
-    margin-top: 10px;
-}
-
-.img {
+.image {
+    position: relative;
+    background-image: url("../../assets/images/landing2.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
     width: 100%;
+    height: 450px;
+    overflow: hidden;
 }
 
+.span {
+    display: block;
+    font-size: 35px;
+}
+
+.perfect {
+    color: rgb(10, 200, 10);
+}
+
+.image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
 
 .title {
-    display: flex;
+    position: absolute;
+    top: 120px;
+    /* Adjust as needed */
+    left: 60px;
+    /* Adjust as needed */
+    z-index: 10;
+    font-size: 49px;
+    color: white;
+    /* Ensure the text is visible */
     padding: 2rem;
-    padding-top: 200px;
-    padding-left: 100px;
-    flex-direction: column;
+
+    /* Optional: Add a background to improve readability */
+}
+
+.discription {
+    margin-top: 20px;
+    font-size: 12px;
+    width: 59%;
+    margin-bottom: 0px;
+    color: rgb(199, 194, 194);
+}
+
+.start {
+    color: rgb(16, 207, 16);
+    font-size: 12px;
+    margin-top: 10px;
+    display: block;
+}
+
+.recentContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.recentOffers {
+    width: 76%;
+}
+
+.recentOffers h2 {
+    margin-bottom: 4px;
 }
 
 .text {
-    color: green;
-    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.recentdata {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.link {
+    text-decoration: none;
+    color: rgb(71, 70, 70);
+}
+
+@media (max-width:750px) {
+    .title {
+        font-size: 35px;
+        left: 20px;
+    }
+
+    .discription {
+        font-size: 10px;
+    }
 }

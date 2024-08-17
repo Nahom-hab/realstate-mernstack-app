@@ -77,8 +77,6 @@ export const getlisting = async (req, res, next) => {
         next(error)
     }
 }
-
-
 export const searchListings = async (req, res, next) => {
     try {
         const limit = parseInt(req.query.limit) || 9;
@@ -89,23 +87,32 @@ export const searchListings = async (req, res, next) => {
         let parking = req.query.parking;
         let type = req.query.type;
 
-        // Convert query parameters to appropriate format
-        if (offer === undefined || offer === 'false') {
-            offer = { $in: [false, undefined] };
-        } else {
+        if (offer === undefined) {
+            offer = { $in: [false, true] };
+        } if (offer === 'true') {
             offer = true;
         }
-
-        if (furnished === undefined || furnished === 'false') {
-            furnished = { $in: [false, undefined] };
-        } else {
-            furnished = true;
+        if (offer === 'false') {
+            offer = false
         }
 
-        if (parking === undefined || parking === 'false') {
-            parking = { $in: [false, undefined] };
-        } else {
+        if (furnished === undefined) {
+            furnished = { $in: [false, true] };
+        } if (furnished === 'true') {
+            furnished = true;
+        }
+        if (furnished === 'false') {
+            furnished = false
+        }
+
+
+        if (parking === undefined) {
+            parking = { $in: [false, true] };
+        } if (parking === 'true') {
             parking = true;
+        }
+        if (parking === 'false') {
+            parking = false
         }
 
         if (type === undefined || type === 'all') {
@@ -113,8 +120,13 @@ export const searchListings = async (req, res, next) => {
         }
 
         const searchTerm = req.query.searchTerm || '';
-        const sort = req.query.sort || 'createdAt';
-        const order = req.query.order || 'desc';
+        const sort = req.query.sort || 'createdAt'; // Field to sort by
+        const order = req.query.order || 'desc';     // Sort direction
+
+        // Construct sort object
+        const sortObject = {};
+        sortObject[sort] = order === 'desc' ? -1 : 1;
+
 
         const listings = await Listing.find({
             name: { $regex: searchTerm, $options: 'i' },
@@ -123,12 +135,13 @@ export const searchListings = async (req, res, next) => {
             parking,
             type,
         })
-            .sort({ [sort]: order })
+            .sort(sortObject)
             .limit(limit)
             .skip(startIndex);
 
         res.status(200).json(listings);
     } catch (error) {
+        console.error(error);
         next(error);
     }
 };
