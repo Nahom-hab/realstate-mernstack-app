@@ -1,18 +1,167 @@
+.lisingContainerContainer {
+  padding-top: 100px;
+}
+
 .lisingContainer {
-  width: 500px;
+  width: 70%;
   margin: 0 auto;
-  margin-top: 20px;
   padding: 2rem;
   padding-top: 5px;
-  background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 20px;
 }
 
+.form {
+  display: flex;
+  gap: 40px;
+}
+
+.heading {
+  text-align: center;
+  margin-top: 0px;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.listingInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 60%;
+}
+
+.fail {
+  color: red;
+  margin: 5px;
+}
+
+
+.succuss {
+  color: rgb(23, 153, 23);
+  margin: 5px;
+}
+
+.textInput::placeholder {
+  color: #3f3e3e;
+}
+
+.textInput {
+  width: 96%;
+}
+
+.textInput,
+.numberInput {
+  padding: 0.8rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #b8b4b4;
+  color: #323131;
+}
+
+.checkBoxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.checkBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkBox input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.numberInputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.numberInputs>div {
+  width: 85px;
+}
+
+
+.numberInput {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.numberLabel {
+  font-size: 0.7rem;
+  color: #666;
+  width: 100px;
+
+}
+
+.fileInput {
+  display: none;
+}
+
+.textArea {
+  resize: none;
+  height: 70px;
+
+}
+
+.uploadLabel {
+  display: inline-block;
+  background-color: #007bff;
+  width: 40%;
+
+  border: none;
+  text-align: center;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.uploadLabel:hover {
+  background-color: #0056b3;
+}
+
+.submitButton {
+  display: block;
+  padding: 0.8rem 1.5rem;
+  background-color: #007bff;
+  color: #fff;
+  margin-top: 10px;
+  border: none;
+  width: 100%;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  gap: 20px;
+}
+
+.inputIMG {
+  height: 40px;
+  width: 40%;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
 .listing_images {
   width: 100px;
   height: 120px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -51,124 +200,25 @@
   justify-content: space-between;
 }
 
-.heading {
-  text-align: center;
-  margin-top: 0px;
-  color: #333;
-  margin-bottom: 1.5rem;
-}
+@media (max-width:820px) {
+  .form {
+    flex-direction: column;
+  }
 
-.listingInputs {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.fail {
-  color: red;
-  margin: 5px;
-}
-
-.succuss {
-  color: rgb(23, 153, 23);
-  margin: 5px;
-}
-
-.textInput,
-.numberInput {
-  padding: 0.8rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.checkBoxes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.checkBox {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.checkBox input[type="checkbox"] {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-.numberInputs {
-  display: grid;
-  grid-template-columns: repeat(4, 75px);
-
-  gap: 50px;
-}
-
-.numberInputs>div {
-  width: 85px;
-}
-
-
-.numberInput {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.numberLabel {
-  font-size: 0.7rem;
-  color: #666;
-  width: 100px;
+  .listingInputs {
+    width: 100%;
+  }
 
 }
 
-.fileInput {
-  display: none;
+@media (max-width:1200px) {
+  .lisingContainer {
+    width: 90%;
+  }
 }
 
-.uploadLabel {
-  display: inline-block;
-  background-color: #0c91a8;
-  width: 40%;
-  text-align: center;
-  border: none;
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-.uploadLabel:hover {
-  background-color: #0056b3;
-}
-
-.submitButton {
-  display: block;
-  padding: 0.8rem 1.5rem;
-  background-color: #007bff;
-  color: #fff;
-  margin-top: 10px;
-  border: none;
-  width: 100%;
-  text-align: center;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.flex {
-  display: flex;
-  gap: 20px;
-}
-
-.inputIMG {
-  height: 40px;
-  width: 40%;
-}
-
-.submitButton:hover {
-  background-color: #0056b3;
+@media (max-width:390px) {
+  .lisingContainer {
+    width: 80%;
+  }
 }

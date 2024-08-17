@@ -10,8 +10,8 @@ export default function ViewListing() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
-  const [landlord,setLandlord]=useState(false)
- 
+  const [landlord, setLandlord] = useState(false)
+
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -51,44 +51,46 @@ export default function ViewListing() {
 
 
   return (
-    <div className={style.listingContainer}>
-     
-      <div className={style.imageSlider}>
-        <button onClick={prevImage} className={style.navButton}>Previous</button>
-        <img src={listing.imageURLs[currentImageIndex]} alt={`Listing ${currentImageIndex}`} className={style.image} />
-        <button onClick={nextImage} className={style.navButton}>Next</button>
-      </div>
-      <div className={style.listingDetails}>
-        <div className={style.title}>{listing.name}{listing.type?` - $${listing.regularPrice}/Month`:''}</div>
-            
-            <p className={style.address}>
-              <FaMapMarkerAlt className={style.location} />
-              {listing.address}
-            </p>
+    <div className={style.containere}>
+      <div className={style.listingContainer}>
 
-            <div className={style.flex}>
-              <div className={style.type}> {listing.type?'For Rent':'For Sale'}</div>
-              <div className={style.price}>$ {listing.regularPrice}</div>
-            </div>
-
-            <p className={style.discription}>Description: <span>{listing.description}</span> </p>
-       
-        <div className={style.things}>
-          <p><FaBed  className={style.icon}/> {listing.bedrooms} bed</p>
-          <p> <FaBath  className={style.icon}/> {listing.bathrooms} bath</p>
-          <p> <FaParking  className={style.icon}/> {listing.furnished ? 'Parking' : 'No Parking'}</p>
-          <p> <FaChair  className={style.icon}/>{listing.parking ? 'Furnished' : 'No Furnished'}</p>  
+        <div className={style.imageSlider}>
+          <button onClick={prevImage} className={style.navButton}>Previous</button>
+          <img src={listing.imageURLs[currentImageIndex]} alt={`Listing ${currentImageIndex}`} className={style.image} />
+          <button onClick={nextImage} className={style.navButton}>Next</button>
         </div>
-       
-        {listing.offer && <p>Discounted Price:{listing.discountedPrice}</p>}
-        <div>
-          {currentUser&&(currentUser.email!==listing.email)&&!landlord&&(
-            <button className={style.contact} onClick={()=>{setLandlord(true)}}>Contact Landlord</button>
-          )
-          } 
-          {landlord&&(
-            <Contact listing={listing} />
-          )}  
+        <div className={style.listingDetails}>
+          <div className={style.title}>{listing.name}{listing.type ? ` - $${listing.regularPrice}/Month` : ''}</div>
+
+          <p className={style.address}>
+            <FaMapMarkerAlt className={style.location} />
+            {listing.address}
+          </p>
+
+          <div className={style.flex}>
+            <div className={style.type}> {listing.type ? 'For Rent' : 'For Sale'}</div>
+            <div className={style.price}>$ {listing.regularPrice}</div>
+          </div>
+
+          <p className={style.discription}>Description: <span>{listing.description}</span> </p>
+
+          <div className={style.things}>
+            <p><FaBed className={style.icon} /> {listing.bedrooms} bed</p>
+            <p> <FaBath className={style.icon} /> {listing.bathrooms} bath</p>
+            <p> <FaParking className={style.icon} /> {listing.furnished ? 'Parking' : 'No Parking'}</p>
+            <p> <FaChair className={style.icon} />{listing.parking ? 'Furnished' : 'No Furnished'}</p>
+          </div>
+
+          {listing.offer && <p>Discounted Price:{listing.discountedPrice}</p>}
+          <div>
+            {currentUser && (currentUser.email !== listing.email) && !landlord && (
+              <button className={style.contact} onClick={() => { setLandlord(true) }}>Contact Landlord</button>
+            )
+            }
+            {landlord && (
+              <Contact listing={listing} />
+            )}
+          </div>
         </div>
       </div>
     </div>

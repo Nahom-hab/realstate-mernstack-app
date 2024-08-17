@@ -154,167 +154,169 @@ export default function EditListing() {
   };
 
   return (
-    <div className={style.lisingContainer}>
-      <h2 className={style.heading}>EDIT LISTING</h2>
-      <form onSubmit={handleSubmit}>
-        <div className={style.listingInputs}>
-          <input
-            className={style.textInput}
-            type="text"
-            id="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            className={style.textInput}
-            type="text"
-            id="description"
-            placeholder="Description"
-            value={formData.description}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            className={style.textInput}
-            type="text"
-            id="address"
-            placeholder="Address"
-            value={formData.address}
-            onChange={handleInputChange}
-            required
-          />
+    <div className={style.lisingContainerContainer}>
+      <div className={style.lisingContainer}>
+        <h2 className={style.heading}>EDIT LISTING</h2>
+        <form className={style.form} onSubmit={handleSubmit}>
+          <div className={style.listingInputs}>
+            <input
+              className={style.textInput}
+              type="text"
+              id="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
+            <textarea
+              className={`${style.textInput} ${style.textArea}`}
+              id="description"
+              placeholder="Description"
+              onChange={handleInputChange}
+              value={formData.description}
+              required />
+            <input
+              className={style.textInput}
+              type="text"
+              id="address"
+              placeholder="Address"
+              value={formData.address}
+              onChange={handleInputChange}
+              required
+            />
 
-          <div className={style.checkBoxes}>
-            <div className={style.checkBox}>
-              <input
-                type="checkbox"
-                id="furnished"
-                checked={formData.furnished}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="furnished">Furnished</label>
+            <div className={style.checkBoxes}>
+              <div className={style.checkBox}>
+                <input
+                  type="checkbox"
+                  id="furnished"
+                  checked={formData.furnished}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="furnished">Furnished</label>
+              </div>
+              <div className={style.checkBox}>
+                <input
+                  type="checkbox"
+                  id="parking"
+                  checked={formData.parking}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="parking">Parking spot</label>
+              </div>
+              <div className={style.checkBox}>
+                <input
+                  type="checkbox"
+                  id="offer"
+                  checked={formData.offer}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="offer">Offer</label>
+              </div>
             </div>
-            <div className={style.checkBox}>
-              <input
-                type="checkbox"
-                id="parking"
-                checked={formData.parking}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="parking">Parking spot</label>
-            </div>
-            <div className={style.checkBox}>
-              <input
-                type="checkbox"
-                id="offer"
-                checked={formData.offer}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="offer">Offer</label>
-            </div>
-          </div>
 
-          <div className={style.numberInputs}>
-            <div>
-              <input
-                className={style.numberInput}
-                min={0}
-                id="bedrooms"
-                type="number"
-                value={formData.bedrooms}
-                onChange={handleInputChange}
-                required
-              />
-              <label className={style.numberLabel} htmlFor="bedrooms">
-                Bedrooms
-              </label>
-            </div>
-            <div>
-              <input
-                className={style.numberInput}
-                min={0}
-                id="bathrooms"
-                type="number"
-                value={formData.bathrooms}
-                onChange={handleInputChange}
-                required
-              />
-              <label className={style.numberLabel} htmlFor="bathrooms">
-                Bathrooms
-              </label>
-            </div>
-            <div>
-              <input
-                className={style.numberInput}
-                id="regularPrice"
-                type="number"
-                value={formData.regularPrice}
-                onChange={handleInputChange}
-                required
-              />
-              <label className={style.numberLabel} htmlFor="regularPrice">
-                Regular Price
-              </label>
-            </div>
-            {formData.offer ? (
+            <div className={style.numberInputs}>
               <div>
                 <input
                   className={style.numberInput}
-                  id="discountedPrice"
+                  min={0}
+                  id="bedrooms"
                   type="number"
-                  value={formData.discountedPrice}
+                  value={formData.bedrooms}
                   onChange={handleInputChange}
+                  required
                 />
-                <label className={style.numberLabel} htmlFor="discountedPrice">
-                  Discounted Price
+                <label className={style.numberLabel} htmlFor="bedrooms">
+                  Bedrooms
                 </label>
               </div>
-            ) : null}
-          </div>
-          <input
-            className={style.textInput}
-            type="text"
-            id="type"
-            placeholder="Type"
-            value={formData.type}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <p>The first image will be the cover image (max=6)</p>
-        <div className={style.flexlast}>
-          <input
-            type="file"
-            className={style.inputIMG}
-            multiple
-            onChange={(e) => setFiles(e.target.files)}
-          />
-          <button
-            type="button"
-            onClick={handleImageUpload}
-            className={style.uploadLabel}
-          >
-            {loading ? 'Uploading...' : 'Upload photos'}
-          </button>
-        </div>
-        <div className={style.contimg}>
-          {formData.imageURLs.length > 0 &&
-            formData.imageURLs.map((image, index) => (
-              <div className={style.listing_imgs} key={index}>
-                <img className={style.listing_images} src={image} alt={`Listing ${index}`} />
-                <button className={style.delbutton} type="button" onClick={() => handleImageRemove(index)}>
-                  delete
-                </button>
+              <div>
+                <input
+                  className={style.numberInput}
+                  min={0}
+                  id="bathrooms"
+                  type="number"
+                  value={formData.bathrooms}
+                  onChange={handleInputChange}
+                  required
+                />
+                <label className={style.numberLabel} htmlFor="bathrooms">
+                  Bathrooms
+                </label>
               </div>
-            ))}
-        </div>
-        <button className={style.submitButton} type="submit">
-          Update Listing
-        </button>
-        {submitError && <p className={style.fail}>Error submitting Listing</p>}
-      </form>
+              <div>
+                <input
+                  className={style.numberInput}
+                  id="regularPrice"
+                  type="number"
+                  value={formData.regularPrice}
+                  onChange={handleInputChange}
+                  required
+                />
+                <label className={style.numberLabel} htmlFor="regularPrice">
+                  Regular Price
+                </label>
+              </div>
+              {formData.offer ? (
+                <div>
+                  <input
+                    className={style.numberInput}
+                    id="discountedPrice"
+                    type="number"
+                    value={formData.discountedPrice}
+                    onChange={handleInputChange}
+                  />
+                  <label className={style.numberLabel} htmlFor="discountedPrice">
+                    Discounted Price
+                  </label>
+                </div>
+              ) : null}
+            </div>
+            <input
+              className={style.textInput}
+              type="text"
+              id="type"
+              placeholder="Type"
+              value={formData.type}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <p>The first image will be the cover image (max=6)</p>
+            <div className={style.flexlast}>
+              <input
+                type="file"
+                className={style.inputIMG}
+                multiple
+                onChange={(e) => setFiles(e.target.files)}
+              />
+              <button
+                type="button"
+                onClick={handleImageUpload}
+                className={style.uploadLabel}
+              >
+                {loading ? 'Uploading...' : 'Upload photos'}
+              </button>
+            </div>
+            <div className={style.contimg}>
+              {formData.imageURLs.length > 0 &&
+                formData.imageURLs.map((image, index) => (
+                  <div className={style.listing_imgs} key={index}>
+                    <img className={style.listing_images} src={image} alt={`Listing ${index}`} />
+                    <button className={style.delbutton} type="button" onClick={() => handleImageRemove(index)}>
+                      delete
+                    </button>
+                  </div>
+                ))}
+            </div>
+            <button className={style.submitButton} type="submit">
+              Update Listing
+            </button>
+            {submitError && <p className={style.fail}>Error submitting Listing</p>}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

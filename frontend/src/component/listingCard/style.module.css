@@ -1,10 +1,15 @@
 /* Results section */
 .results {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* Changed to column to allow vertical scrolling */
     background: #f5f5f5;
     border-radius: 8px;
-    height: 85svh;
-    width: 65%;
+    width: 70%;
+    height: 86svh;
+    /* Adjust height as needed */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
     padding: 1.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -12,15 +17,17 @@
 
 /* Grid layout for results */
 .gridContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 220px);
-    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 /* Result card styling */
 .resultCard {
     background: #ffffff;
     border: 1px solid #ddd;
+    width: 200px;
+    margin-bottom: 10px;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -31,7 +38,6 @@
 .location {
     color: green;
     margin-right: 8px;
-
 }
 
 .resultdiscription {
@@ -40,19 +46,27 @@
     margin-bottom: 10px;
 }
 
-.resultCard img {
+.imgContainer {
+    overflow: hidden;
     height: 140px;
     width: 100%;
-    object-fit: cover;
-    border-radius: 0;
 }
 
-/* .resultCard img:hover {
-    zoom: 110%;
-} */
+.imgee {
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 140px;
+    /* height: auto; */
+    display: block;
+}
+
+.imgContainer:hover .imgee {
+    transform: scale(1.2);
+}
 
 .resultCard:hover {
-    transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -94,7 +108,6 @@
 .resultLocation {
     font-size: 12px;
     color: #666;
-
     margin-bottom: 6px;
 }
 

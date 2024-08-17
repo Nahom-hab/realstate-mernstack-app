@@ -1,129 +1,145 @@
+.containere {
+  padding-top: 76px;
+}
+
 .listingContainer {
-    max-width: 100%;
-    border-radius: 8px;
-  }
-  
-  .heading {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .imageSlider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .navButton {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .navButton:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  .navButton:first-of-type {
-    left: 10px;
-  }
-  
-  .navButton:last-of-type {
-    right: 10px;
-  }
-  
-  .listingDetails {
-    padding:0 6%;
-  }
-  
-  .listingDetails p {
-    margin: 5px 0;
-  }
-  
-  .listingDetails strong {
-    display: inline-block;
-    width: 150px;
-  }
-  .type{
-    padding: 5px 30px;
-    background-color: rgb(184, 6, 6);
-    border-radius: 8px;
-    color: white;
-    width: fit-content;
-  }
-  .flex{
-    display: flex;
-    gap: 10px;
-    margin-top: 5px;
-    margin-bottom: 19px;
-  }
-  .price{
-    padding: 5px 30px;
-    border-radius: 8px;
-    color: white;
-    width: fit-content;
-   background-color: green; 
-  }
-  .title{
-    font-size: 20px;
-    color: rgb(43, 42, 42);
-    margin-bottom: 20px;
-  }
-  .location{
-    color: green;
-    padding-right: 6px;
-    font-size: 14px;
-  }
-  .address{
-    font-size: 13px;
+  max-width: 100%;
+  border-radius: 8px;
+}
 
-  }
-  .discription{
-    color: black;
-    font-weight: 800;
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  }
-  .discription span{
-    color: rgb(41, 40, 40);
-    font-weight: normal;
-  }
-  .things{
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  .things p{
-    font-size: small;
-  }
-  .icon{
-    font-size: 15px;
-    
-  }
-  
-  .contact{
-    padding: 10px 20px;
-    background-color: rgb(113, 82, 226);
-    color: white;
-    margin-top: 10px;
-    border: none;
-    border-radius: 9px;
-    font-size: 16px;
-    margin-bottom: 50px;
-    }
-  .contact:hover{
-    opacity: 0.8;
-  }
+.imageSlider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.navButton:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.navButton:first-of-type {
+  left: 10px;
+}
+
+.navButton:last-of-type {
+  right: 10px;
+}
+
+.listingDetails {
+  padding: 0 6%;
+}
+
+.listingDetails p {
+  margin: 5px 0;
+}
+
+.listingDetails strong {
+  display: inline-block;
+  width: 150px;
+}
+
+.type {
+  padding: 5px 30px;
+  background-color: rgb(184, 6, 6);
+  border-radius: 8px;
+  color: white;
+  width: fit-content;
+}
+
+.flex {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 19px;
+}
+
+.price {
+  padding: 5px 30px;
+  border-radius: 8px;
+  color: white;
+  width: fit-content;
+  background-color: green;
+}
+
+.title {
+  font-size: 20px;
+  color: rgb(43, 42, 42);
+  margin-bottom: 20px;
+}
+
+.location {
+  color: green;
+  padding-right: 6px;
+  font-size: 14px;
+}
+
+.address {
+  font-size: 13px;
+
+}
+
+.discription {
+  color: black;
+  font-weight: 800;
+
+}
+
+.discription span {
+  color: rgb(41, 40, 40);
+  font-weight: normal;
+}
+
+.things {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.things p {
+  font-size: small;
+}
+
+.icon {
+  font-size: 15px;
+
+}
+
+.contact {
+  padding: 10px 20px;
+  background-color: rgb(113, 82, 226);
+  color: white;
+  margin-top: 10px;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+.contact:hover {
+  opacity: 0.8;
+}
