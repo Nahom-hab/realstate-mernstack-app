@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import style from './styles.module.css';
 import { FaSearch } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,32 @@ export default function Navigation() {
   const { currentUser } = useSelector(state => state.user)
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const sidebarRef = useRef(null);
+  const toggleMenu = () => {
+    setMenuOpen(prevState => !prevState);
+  };
+
+  // Click outside handler for closing the menu
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  };
+
+  // Effect to handle click outside
+  useEffect(() => {
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
 
 
   const handleSearch = (e) => {
@@ -51,33 +77,34 @@ export default function Navigation() {
         </form>
 
         <nav className={style.nav}>
-          <div className={style.hamburgeur}>
+          <div className={style.hamburgeur} onClick={toggleMenu}>
             <div className={style.line}></div>
             <div className={style.line}></div>
             <div className={style.line}></div>
           </div>
-          <ul className={style.ul}>
+          <ul className={`${style.ul} ${menuOpen ? style.open : ''}`}>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" className={location.pathname === '/' ? style.active : ''}>Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about" className={location.pathname === '/about' ? style.active : ''}>About</Link>
             </li>
             {currentUser ? (
               <li>
-                <Link to="/mylisting">My Listing</Link>
-              </li>) : ''
-            }
-
-
-            {currentUser ?
-
-              (
-                <li><Link to='/profile'><img className={style.profileimg} src={currentUser.photoURL} alt="profile" /></Link></li>) : (
-                <li>
-                  <Link to='./login'>Login</Link>
-                </li>
-              )}
+                <Link to="/mylisting" className={location.pathname === '/mylisting' ? style.active : ''}>My Listing</Link>
+              </li>
+            ) : null}
+            {currentUser ? (
+              <li>
+                <Link to='/profile'>
+                  <img className={style.profileimg} src={currentUser.photoURL} alt="profile" />
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link to='./login' className={location.pathname === '/login' ? style.active : ''}>Login</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

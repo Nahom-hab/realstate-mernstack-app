@@ -2,8 +2,9 @@
   background-color: #333;
   color: #fff;
   width: 100%;
-  /* position: fixed; */
   padding: 1rem 0;
+  position: relative;
+  /* Allow positioning of the sidebar */
 }
 
 .container {
@@ -33,37 +34,12 @@
   color: #ff6b6b;
 }
 
-.nav ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav li {
-  margin-left: 1.5rem;
-}
-
-.nav a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
-}
-
-.nav a:hover {
-  color: #ff6b6b;
-}
-
-/* ... other styles remain the same ... */
-
 .search {
   display: flex;
   align-items: center;
   background-color: #e0dfdf;
   border-radius: 4px;
   padding: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .search input {
@@ -90,36 +66,13 @@
 .profileimg {
   border-radius: 50%;
   width: 40px;
-
 }
 
-.ul {
-  display: flex;
-  align-items: center;
 
-}
 
-.profileimg:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
 
-.line {
-  height: 3px;
-  width: 20px;
-  background-color: white;
-}
-
-.hamburgeur {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  display: none;
-}
 
 @media (max-width: 750px) {
-
   .search {
     padding: 0.2rem;
   }
@@ -133,19 +86,104 @@
   }
 
   .searchButton {
-
     font-size: 1rem;
+  }
+
+
+}
+
+/* General styles for the nav */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 1rem;
+}
+
+.hamburgeur {
+  display: none;
+  /* Hidden by default for desktop */
+  flex-direction: column;
+  cursor: pointer;
+  /* Change cursor to pointer */
+}
+
+.line {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin: 4px 0;
+  /* Space between lines */
+}
+
+/* Styles for the list */
+.ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ul li {
+  margin-left: 2rem;
+  /* Space between links */
+}
+
+.ul a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.ul a:hover,
+.active {
+  color: #ff6b6b;
+  /* Highlight color for active/hover state */
+}
+
+/* Profile image styles */
+.profileimg {
+  border-radius: 50%;
+  width: 30px;
+  /* Adjust size as needed */
+}
+
+/* Responsive styles */
+@media (max-width: 750px) {
+  .hamburgeur {
+    display: flex;
+    /* Show hamburger icon on mobile */
   }
 
   .ul {
     display: none;
+    /* Hide menu by default */
+    flex-direction: column;
+    /* Stack items vertically */
+    position: absolute;
+    /* Positioning for dropdown */
+    top: 60px;
+    /* Adjust based on header height */
+    right: 0;
+    /* Align to the right */
+    background-color: #333;
+    /* Match nav background */
+    padding: 1rem;
+    width: 200px;
+    /* Set a width for the dropdown */
+    z-index: 1000;
+    /* Ensure it appears above other elements */
+  }
+
+  .ul.open {
+    display: flex;
+    /* Show menu when open */
   }
 
   .ul li {
-    display: none;
-  }
-
-  .hamburgeur {
-    display: flex;
+    margin: 0.5rem 0;
+    /* Space between links */
   }
 }

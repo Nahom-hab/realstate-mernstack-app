@@ -26,7 +26,7 @@ export default function CreateListing() {
     userRef: '',
     email: '',
     username: ''
-  });
+  })
 
 
   const [loading, setLoading] = useState(false);

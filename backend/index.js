@@ -3,11 +3,14 @@ import mongoose from 'mongoose'
 import dovenv from "dotenv"
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
+
 import path from 'path'
+import { fileURLToPath } from 'url';
+
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
 import ListingRouter from './routes/llisting.route.js'
-import { fileURLToPath } from 'url';
+
 
 const app = express();
 app.use(cookieParser())
